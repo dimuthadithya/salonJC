@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Beauty Services - SalonJC</title>
+
+    <!-- favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./img/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./img/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./img/favicon_io/site.webmanifest" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Salon<span>JC</span></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link book-now-nav" href="#book-appointment"
+                >Book Now</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <!-- Page Header -->
+      <header class="service-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center" data-aos="fade-up">
+              <h1>Our Beauty Services</h1>
+              <p class="lead">
+                Experience luxury beauty treatments tailored just for you
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Bridal Services Section -->
+      <section class="service-section" id="bridal-services">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title text-center" data-aos="fade-up">
+                <span class="subtitle">Bridal Services</span>
+                <h2>Make Your Special Day Perfect</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Complete Bridal Package -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up">
+              <div class="service-package-card">
+                <div class="package-header">
+                  <h3>Complete Bridal Package</h3>
+                  <span class="price">Starting from LKR 75,000</span>
+                  <span class="duration">Duration: 6-8 hours</span>
+                </div>
+                <div class="package-content">
+                  <ul>
+                    <li>
+                      <i class="fas fa-check"></i> Pre-bridal facial treatment
+                    </li>
+                    <li><i class="fas fa-check"></i> Hair spa and treatment</li>
+                    <li>
+                      <i class="fas fa-check"></i> Wedding day makeup and
+                      hairstyling
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Dress fitting assistance
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Photography session support
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Touch-up kit for the ceremony
+                    </li>
+                  </ul>
+                  <button class="btn btn-book" data-package="complete-bridal">
+                    Book Package
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Engagement Package -->
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="service-package-card">
+                <div class="package-header">
+                  <h3>Engagement Package</h3>
+                  <span class="price">Starting from LKR 35,000</span>
+                  <span class="duration">Duration: 3-4 hours</span>
+                </div>
+                <div class="package-content">
+                  <ul>
+                    <li>
+                      <i class="fas fa-check"></i> Professional makeup
+                      application
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Hairstyling and setting
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Dress coordination assistance
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i> Touch-up service during event
+                    </li>
+                    <li><i class="fas fa-check"></i> Basic facial treatment</li>
+                  </ul>
+                  <button class="btn btn-book" data-package="engagement">
+                    Book Package
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Beauty Treatments Section -->
+      <section class="service-section bg-light" id="beauty-treatments">
+        <div class="container">
+          <!-- Facial Services -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <div class="section-title text-center" data-aos="fade-up">
+                <span class="subtitle">Facial Services</span>
+                <h2>Advanced Facial Treatments</h2>
+              </div>
+            </div>
+
+            <!-- Facial Service Cards -->
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-spa"></i>
+                </div>
+                <h4>Deep Cleansing Facial</h4>
+                <p>Complete pore cleansing and purification treatment</p>
+                <div class="service-price">
+                  <span>LKR 4,500</span>
+                  <small>60 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-clock-rotate-left"></i>
+                </div>
+                <h4>Anti-aging Treatment</h4>
+                <p>Advanced treatment to reduce fine lines and wrinkles</p>
+                <div class="service-price">
+                  <span>LKR 6,500</span>
+                  <small>90 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-sun"></i>
+                </div>
+                <h4>Whitening Facial</h4>
+                <p>Specialized treatment for skin brightening</p>
+                <div class="service-price">
+                  <span>LKR 5,500</span>
+                  <small>75 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-flask"></i>
+                </div>
+                <h4>Acne Treatment</h4>
+                <p>Specialized care for acne-prone skin</p>
+                <div class="service-price">
+                  <span>LKR 4,000</span>
+                  <small>60 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hair Services -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <div class="section-title text-center" data-aos="fade-up">
+                <span class="subtitle">Hair Services</span>
+                <h2>Professional Hair Care</h2>
+              </div>
+            </div>
+
+            <!-- Hair Service Cards -->
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-cut"></i>
+                </div>
+                <h4>Haircut & Styling</h4>
+                <p>Professional cut and style by expert stylists</p>
+                <div class="service-price">
+                  <span>From LKR 2,500</span>
+                  <small>45-60 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-paint-brush"></i>
+                </div>
+                <h4>Hair Coloring</h4>
+                <p>Full color, highlights, or balayage</p>
+                <div class="service-price">
+                  <span>From LKR 8,500</span>
+                  <small>2-4 hours</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-wind"></i>
+                </div>
+                <h4>Hair Treatments</h4>
+                <p>Rebonding, perming, and keratin treatments</p>
+                <div class="service-price">
+                  <span>From LKR 12,000</span>
+                  <small>3-5 hours</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-spa"></i>
+                </div>
+                <h4>Hair Spa</h4>
+                <p>Luxury hair spa and conditioning treatments</p>
+                <div class="service-price">
+                  <span>LKR 4,500</span>
+                  <small>90 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Makeup Services -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <div class="section-title text-center" data-aos="fade-up">
+                <span class="subtitle">Makeup Services</span>
+                <h2>Professional Makeup</h2>
+              </div>
+            </div>
+
+            <!-- Makeup Service Cards -->
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-magic"></i>
+                </div>
+                <h4>Party Makeup</h4>
+                <p>Perfect look for any special occasion</p>
+                <div class="service-price">
+                  <span>LKR 5,000</span>
+                  <small>60 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-camera"></i>
+                </div>
+                <h4>Photoshoot Makeup</h4>
+                <p>Camera-ready makeup for perfect photos</p>
+                <div class="service-price">
+                  <span>LKR 7,500</span>
+                  <small>90 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h4>Makeup Lessons</h4>
+                <p>Learn professional makeup techniques</p>
+                <div class="service-price">
+                  <span>LKR 8,500</span>
+                  <small>2 hours</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <h4>Professional Makeup</h4>
+                <p>Full professional makeup service</p>
+                <div class="service-price">
+                  <span>LKR 6,500</span>
+                  <small>75 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Services -->
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title text-center" data-aos="fade-up">
+                <span class="subtitle">Additional Services</span>
+                <h2>Beauty Extras</h2>
+              </div>
+            </div>
+
+            <!-- Additional Service Cards -->
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <h4>Eyebrow Shaping</h4>
+                <p>Threading and eyebrow design</p>
+                <div class="service-price">
+                  <span>LKR 1,000</span>
+                  <small>20 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-hand-sparkles"></i>
+                </div>
+                <h4>Manicure & Pedicure</h4>
+                <p>Complete nail care treatment</p>
+                <div class="service-price">
+                  <span>LKR 3,500</span>
+                  <small>90 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-spa"></i>
+                </div>
+                <h4>Body Treatments</h4>
+                <p>Relaxing body spa treatments</p>
+                <div class="service-price">
+                  <span>From LKR 5,500</span>
+                  <small>90 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="service-card">
+                <div class="service-icon">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <h4>Beauty Consultation</h4>
+                <p>Professional beauty advice and planning</p>
+                <div class="service-price">
+                  <span>LKR 2,500</span>
+                  <small>45 mins</small>
+                </div>
+                <button class="btn btn-book">Book Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Consultation CTA -->
+      <section class="consultation-cta">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center" data-aos="fade-up">
+              <h2>Not Sure Which Service to Choose?</h2>
+              <p>Book a free consultation with our beauty experts</p>
+              <button class="btn btn-consultation">
+                Book Free Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-info">
+              <h5>Salon<span>JC</span></h5>
+              <p class="mt-3">
+                Your premier beauty destination in Pallawela, offering
+                professional services and exceptional care since 2025.
+              </p>
+              <div class="social-links mt-4">
+                <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-links">
+              <h5>Quick Links</h5>
+              <ul class="list-unstyled mt-3">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-services">
+              <h5>Our Services</h5>
+              <ul class="list-unstyled mt-3">
+                <li><a href="#bridal-services">Bridal Services</a></li>
+                <li><a href="#beauty-treatments">Beauty Treatments</a></li>
+                <li><a href="#beauty-treatments">Hair Services</a></li>
+                <li><a href="#beauty-treatments">Makeup Services</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-contact">
+              <h5>Contact Info</h5>
+              <ul class="list-unstyled contact-info mt-3">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Kaloliya Rd, Pallawela, Sri Lanka</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>071 414 7628</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>salonjc2092@gmail.com</span>
+                </li>
+              </ul>
+              <div class="business-hours mt-4">
+                <h5>Business Hours</h5>
+                <ul class="list-unstyled hours-list mt-3">
+                  <li>Monday - Saturday: 9:00 AM - 8:00 PM</li>
+                  <li>Sunday: 10:00 AM - 6:00 PM</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="footer-bottom text-center">
+              <hr class="footer-divider" />
+              <p class="mb-0">&copy; 2025 SalonJC. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

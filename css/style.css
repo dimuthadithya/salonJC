@@ -29,11 +29,26 @@
     --black-rgb: 26, 26, 26;                 /* Pure Black for rgba */
 }
 
+html {
+    height: 100%;
+}
+
 body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
     color: var(--text-color);
     overflow-x: hidden;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer-section {
+    flex-shrink: 0;
 }
 
 /* Navigation styles moved to nav.css */
@@ -822,277 +837,242 @@ body {
     transform: translateY(-3px);
 }
 
-@media (max-width: 991.98px) {
-    .contact-info-card {
-        margin-bottom: 2rem;
-    }
-    
-    .contact-form-card {
-        padding: 2rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .contact-form-card {
-        padding: 1.5rem;
-    }
-}
-
-/* Footer styles moved to footer.css */
-
-/* Modern Hover Effects */
-.hover-float {
-    transition: transform 0.3s ease;
-}
-
-.hover-float:hover {
-    transform: translateY(-10px);
-}
-
-/* Scroll Down Indicator */
-.scroll-down {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
-}
-
-.scroll-down a {
-    color: var(--light-color); /* Changed from white */
-    font-size: 2rem;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.scroll-down a:hover {
-    opacity: 1;
-    color: var(--primary-color);
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}
-
-/* Animations */
-.btn {
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Glass Morphism Effects */
-.glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--scrollbar-track-color); /* New variable */
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-}
-
-/* Gallery Section */
-.gallery-section {
-    position: relative;
-    background: linear-gradient(rgba(var(--black-rgb), 0.95), rgba(var(--black-rgb), 0.95)),
-                url('../img/about/background.jpg') center/cover fixed;
-}
-
-.gallery-filter .nav-pills .nav-link {
+/* Services Page Styles */
+.service-header {
+    background: linear-gradient(rgba(var(--black-rgb), 0.8), rgba(var(--black-rgb), 0.8)),
+                url('../img/about/salon-interior.jpg') center/cover no-repeat fixed;
+    padding: 150px 0 100px;
     color: var(--light-color);
-    background: transparent;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(var(--primary-color-rgb), 0.3);
-    margin: 0 0.5rem;
-}
-
-.gallery-filter .nav-pills .nav-link:hover,
-.gallery-filter .nav-pills .nav-link.active {
-    background: var(--primary-color);
-    color: var(--dark-color);
-    transform: translateY(-2px);
-}
-
-.gallery-filter .nav-pills .nav-link i {
-    color: var(--primary-color);
-    transition: all 0.3s ease;
-}
-
-.gallery-filter .nav-pills .nav-link:hover i,
-.gallery-filter .nav-pills .nav-link.active i {
-    color: var(--dark-color);
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    border: 2px solid rgba(var(--primary-color-rgb), 0.3);
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    transition: all 0.5s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(var(--black-rgb), 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-.overlay-content {
     text-align: center;
+}
+
+.service-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.service-header .lead {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.service-section {
+    padding: 80px 0;
+}
+
+.service-section.bg-light {
+    background-color: rgba(var(--light-color-rgb), 0.02) !important;
+}
+
+.service-package-card {
+    background: var(--secondary-color);
+    border-radius: 15px;
     padding: 2rem;
-    transform: translateY(20px);
+    height: 100%;
     transition: all 0.3s ease;
+    border: 1px solid rgba(var(--highlight-color-rgb), 0.1);
 }
 
-.gallery-item:hover .overlay-content {
-    transform: translateY(0);
+.service-package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.2);
 }
 
-.overlay-content h4 {
+.package-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(var(--highlight-color-rgb), 0.1);
+}
+
+.package-header h3 {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.package-header .price {
+    display: block;
+    color: var(--light-color);
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
-.overlay-content p {
+.package-header .duration {
+    display: block;
+    color: rgba(var(--light-color-rgb), 0.7);
+    font-size: 0.9rem;
+}
+
+.package-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.package-content ul li {
     color: var(--light-color);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.package-content ul li i {
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+
+.service-card {
+    background: var(--secondary-color);
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(var(--highlight-color-rgb), 0.1);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.2);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: rotateY(360deg);
+}
+
+.service-icon i {
+    font-size: 1.8rem;
+    color: var(--dark-color);
+}
+
+.service-card h4 {
+    color: var(--light-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: rgba(var(--light-color-rgb), 0.8);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.service-price {
     margin-bottom: 1.5rem;
 }
 
-.view-btn {
-    width: 50px;
-    height: 50px;
-    background: var(--primary-color);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: var(--dark-color);
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.view-btn:hover {
-    background: var(--light-color);
+.service-price span {
     color: var(--primary-color);
-    transform: scale(1.1);
-}
-
-/* Lightbox Customization */
-.lb-data .lb-caption {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--light-color);
-    font-family: 'Poppins', sans-serif;
+    display: block;
+    margin-bottom: 0.3rem;
 }
 
-.lb-data .lb-number {
+.service-price small {
+    color: rgba(var(--light-color-rgb), 0.7);
+    font-size: 0.85rem;
+}
+
+.btn-book {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-book:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.consultation-cta {
+    background: linear-gradient(rgba(var(--black-rgb), 0.9), rgba(var(--black-rgb), 0.9)),
+                url('../img/about/salon-interior.jpg') center/cover no-repeat fixed;
+    padding: 80px 0;
+    color: var(--light-color);
+    text-align: center;
+}
+
+.consultation-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
-.lb-nav a.lb-prev,
-.lb-nav a.lb-next {
-    opacity: 0.8;
+.consultation-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
 }
 
-.lb-nav a.lb-prev:hover,
-.lb-nav a.lb-next:hover {
-    opacity: 1;
-}
-
-/* Scroll to Top Button */
-.scroll-to-top {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    width: 45px;
-    height: 45px;
+.btn-consultation {
     background-color: var(--primary-color);
     color: var(--dark-color);
-    text-align: center;
-    font-size: 18px;
-    line-height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid var(--primary-color);
     transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 2px 10px rgba(var(--black-rgb), 0.2);
-    z-index: 1000;
 }
 
-.scroll-to-top:hover {
-    background-color: var(--accent-color);
+.btn-consultation:hover {
+    background-color: transparent;
+    color: var(--primary-color);
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.3);
 }
 
-.scroll-to-top.visible {
-    opacity: 1;
-    visibility: visible;
+@media (max-width: 991.98px) {
+    .service-header {
+        padding: 120px 0 80px;
+    }
+
+    .service-header h1 {
+        font-size: 2.8rem;
+    }
+
+    .service-package-card,
+    .service-card {
+        margin-bottom: 2rem;
+    }
 }
 
-.scroll-to-top i {
-    line-height: 45px;
+@media (max-width: 767.98px) {
+    .service-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .service-header .lead {
+        font-size: 1rem;
+    }
+
+    .consultation-cta h2 {
+        font-size: 2rem;
+    }
 }
+
+/* ...existing code... */
