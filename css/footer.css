@@ -1,0 +1,82 @@
+/* Footer Styles */
+.footer-section {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    border-top: 1px solid rgba(var(--highlight-color-rgb), 0.1);
+}
+
+.footer-section h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--light-color);
+}
+
+.footer-section span {
+    color: var(--primary-color);
+}
+
+.footer-info p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(var(--light-color-rgb), 0.8);
+}
+
+.footer-links ul li, 
+.footer-services ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links ul li a, 
+.footer-services ul li a {
+    color: rgba(var(--light-color-rgb), 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-links ul li a:hover, 
+.footer-services ul li a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted-color);
+}
+
+.contact-info li i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.hours-list li {
+    font-size: 0.9rem;
+    color: var(--text-muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.footer-divider {
+    border-color: rgba(var(--black-rgb),0.1);
+    margin: 1rem 0;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: var(--text-muted-color);
+}
+
+.footer-section .social-links a {
+    color: var(--light-color);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.footer-section .social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}

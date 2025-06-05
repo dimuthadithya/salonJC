@@ -36,151 +36,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation */
-.navbar {
-    transition: all 0.3s ease;
-    padding: 1.2rem 0;
-    background: transparent !important;
-}
-
-.navbar.scrolled {
-    background: rgba(var(--navbar-base-color-rgb), 0.95) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(var(--black-rgb), 0.2);
-    padding: 1rem 0;
-}
-
-/* Add a dark overlay to the navbar before scrolling */
-.navbar:not(.scrolled)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(var(--navbar-base-color-rgb), 0.9);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    z-index: -1;
-}
-
-.navbar-brand {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--light-color) !important;
-    padding: 0;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.navbar-brand span {
-    color: var(--primary-color) !important;
-    font-weight: 800;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Fix hamburger menu color for mobile */
-.navbar-toggler {
-    border-color: rgba(var(--light-color-rgb), 0.5) !important;
-    padding: 0.5rem;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
-
-.navbar .navbar-nav .nav-link {
-    color: #fff !important;
-    font-weight: 600;
-    position: relative;
-    padding: 0.5rem 1rem !important;
-    transition: all 0.3s ease;
-    opacity: 0.95;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-.navbar .navbar-nav .nav-link:hover, .navbar .navbar-nav .nav-link.active {
-    color: var(--highlight-color) !important;
-    opacity: 1;
-    text-shadow: 0 2px 8px rgba(var(--black-rgb),0.25);
-}
-
-.navbar .navbar-nav .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: var(--highlight-color);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.navbar .navbar-nav .nav-link:hover::after, .navbar .navbar-nav .nav-link.active::after {
-    width: 70%;
-}
-
-.navbar.scrolled .navbar-nav .nav-link {
-    color: #fff !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-.navbar.scrolled .navbar-nav .nav-link:hover, .navbar.scrolled .navbar-nav .nav-link.active {
-    color: var(--highlight-color) !important;
-}
-
-/* Nav Book Now Button */
-.navbar .book-now-nav {
-    background-color: var(--primary-color);
-    color: var(--light-color) !important;
-    padding: 0.5rem 1.5rem !important;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: 2px solid var(--primary-color);
-    transition: all 0.3s ease;
-    margin-left: 1rem;
-}
-
-.navbar .book-now-nav:hover {
-    background-color: transparent;
-    color: var(--primary-color) !important;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.navbar .book-now-nav::after {
-    display: none;  /* Remove the underline effect from nav links */
-}
-
-.navbar.scrolled .book-now-nav {
-    background-color: var(--primary-color);
-    color: var(--light-color) !important;
-    border-color: var(--primary-color);
-}
-
-.navbar.scrolled .book-now-nav:hover {
-    background-color: transparent;
-    color: var(--primary-color) !important;
-}
-
-/* Mobile nav background fix */
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    background: var(--navbar-base-color) !important;
-  }
-  .navbar .navbar-nav .nav-link {
-    color: var(--light-color) !important; /* Ensuring it's var(--light-color) */
-    border-bottom: 1px solid rgba(var(--light-color-rgb),0.08);
-  }
-  .navbar .book-now-nav {
-    margin: 1rem 0;
-    text-align: center;
-    display: inline-block;
-  }
-}
+/* Navigation styles moved to nav.css */
 
 /* Hero Section */
 .hero-section {
@@ -982,25 +838,15 @@ body {
     }
 }
 
-/* Footer */
-.social-links a {
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
+/* Footer styles moved to footer.css */
+
+/* Modern Hover Effects */
+.hover-float {
+    transition: transform 0.3s ease;
 }
 
-.social-links a:hover {
-    color: var(--primary-color) !important; /* Changed from #007bff */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .hero-section {
-        height: 80vh;
-    }
-    
-    .service-card {
-        margin-bottom: 2rem;
-    }
+.hover-float:hover {
+    transform: translateY(-10px);
 }
 
 /* Scroll Down Indicator */
@@ -1052,98 +898,6 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-}
-
-/* Modern Hover Effects */
-.hover-float {
-    transition: transform 0.3s ease;
-}
-
-.hover-float:hover {
-    transform: translateY(-10px);
-}
-
-/* Footer Styles */
-.footer-section {
-    background-color: var(--secondary-color);
-    color: var(--light-color);
-    border-top: 1px solid rgba(var(--highlight-color-rgb), 0.1); /* Using var for opacity */
-}
-
-.footer-section h5 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--light-color); /* Ensuring it's var(--light-color) */
-}
-
-.footer-section span {
-    color: var(--primary-color);
-}
-
-.footer-info p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(var(--light-color-rgb), 0.8); /* Using var for opacity */
-}
-
-.social-links a {
-    color: var(--light-color);
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--primary-color);
-    transform: translateY(-3px);
-}
-
-.footer-links ul li, 
-.footer-services ul li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-links ul li a, 
-.footer-services ul li a {
-    color: rgba(var(--light-color-rgb), 0.7); /* Using var for opacity */
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.footer-links ul li a:hover, 
-.footer-services ul li a:hover {
-    color: var(--primary-color);
-    padding-left: 5px;
-}
-
-.contact-info li {
-    display: flex;
-    align-items: start;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-muted-color); /* New variable */
-}
-
-.contact-info li i {
-    margin-right: 10px;
-    color: var(--primary-color);
-}
-
-.hours-list li {
-    font-size: 0.9rem;
-    color: var(--text-muted-color); /* New variable */
-    margin-bottom: 0.5rem;
-}
-
-.footer-divider {
-    border-color: rgba(var(--black-rgb),0.1); /* Using var for opacity */
-    margin: 1rem 0;
-}
-
-.footer-bottom p {
-    font-size: 0.9rem;
-    color: var(--text-muted-color); /* New variable */
 }
 
 /* Custom Scrollbar */
