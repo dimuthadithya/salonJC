@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Reviews & Testimonials - SalonJC</title>
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/reviews.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Salon<span>JC</span></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="reviews.html">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user"></i> My Account
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="profile.html">Profile</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" id="logoutBtn">Logout</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a href="booking.html" class="nav-link book-now-nav">Book Now</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Reviews Header -->
+    <section class="reviews-header">
+      <div class="container text-center">
+        <h1>Customer Reviews & Testimonials</h1>
+        <div class="overall-rating">
+          <div class="rating-number">
+            <span class="number">4.8</span>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>Based on 256 reviews</p>
+          </div>
+          <div class="rating-breakdown">
+            <div class="rating-bar">
+              <span>5 Stars</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+              <span>192</span>
+            </div>
+            <div class="rating-bar">
+              <span>4 Stars</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 15%"></div>
+              </div>
+              <span>38</span>
+            </div>
+            <div class="rating-bar">
+              <span>3 Stars</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 7%"></div>
+              </div>
+              <span>18</span>
+            </div>
+            <div class="rating-bar">
+              <span>2 Stars</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 2%"></div>
+              </div>
+              <span>5</span>
+            </div>
+            <div class="rating-bar">
+              <span>1 Star</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 1%"></div>
+              </div>
+              <span>3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Filter -->
+    <section class="reviews-filter">
+      <div class="container">
+        <div class="filter-options">
+          <button class="btn btn-filter active" data-category="all">
+            All Reviews
+          </button>
+          <button class="btn btn-filter" data-category="bridal">
+            Bridal Services
+          </button>
+          <button class="btn btn-filter" data-category="beauty">
+            Beauty Treatments
+          </button>
+          <button class="btn btn-filter" data-category="hair">
+            Hair Services
+          </button>
+          <button class="btn btn-filter" data-category="makeup">Makeup</button>
+        </div>
+        <div class="sort-options">
+          <select class="form-select" id="reviewSort">
+            <option value="newest">Newest First</option>
+            <option value="highest">Highest Rated</option>
+            <option value="lowest">Lowest Rated</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews List -->
+    <section class="reviews-list">
+      <div class="container">
+        <div class="row g-4" id="reviewsContainer">
+          <!-- Review Items will be dynamically loaded here -->
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn btn-load-more" id="loadMoreReviews">
+            Load More Reviews
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leave a Review Section -->
+    <section class="leave-review">
+      <div class="container">
+        <div class="review-form-wrapper">
+          <h2>Share Your Experience</h2>
+          <p>
+            Your feedback helps us improve and helps others make informed
+            decisions.
+          </p>
+          <div id="loginPrompt" class="d-none">
+            <p>Please <a href="login.html">login</a> to leave a review.</p>
+          </div>
+          <form id="reviewForm" class="review-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="serviceType">Service Type</label>
+                <select class="form-select" id="serviceType" required>
+                  <option value="">Select a service</option>
+                  <option value="bridal">Bridal Services</option>
+                  <option value="beauty">Beauty Treatments</option>
+                  <option value="hair">Hair Services</option>
+                  <option value="makeup">Makeup Services</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label>Rating</label>
+                <div class="rating-input">
+                  <i class="far fa-star" data-rating="1"></i>
+                  <i class="far fa-star" data-rating="2"></i>
+                  <i class="far fa-star" data-rating="3"></i>
+                  <i class="far fa-star" data-rating="4"></i>
+                  <i class="far fa-star" data-rating="5"></i>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="reviewText">Your Review</label>
+                <textarea
+                  class="form-control"
+                  id="reviewText"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <label for="photoUpload">Add Photos (Optional)</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="photoUpload"
+                  multiple
+                  accept="image/*"
+                />
+                <div id="imagePreview" class="image-preview mt-2"></div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-submit-review">
+                  Submit Review
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="container">
+        <!-- ... Existing footer content ... -->
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/reviews.js"></script>
+  </body>
+</html>

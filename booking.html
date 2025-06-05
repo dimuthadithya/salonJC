@@ -49,8 +49,8 @@
     <link rel="stylesheet" href="css/booking.css" />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">Salon<span>JC</span></a>
         <button
@@ -58,11 +58,14 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home</a>
             </li>
@@ -83,8 +86,8 @@
                 ><i class="fas fa-user"></i> Login</a
               >
             </li>
-            <li class="nav-item">
-              <a class="nav-link book-now-nav active" href="booking.html"
+            <li class="nav-item ms-lg-2">
+              <a href="booking.html" class="nav-link book-now-nav active"
                 >Book Now</a
               >
             </li>
@@ -409,10 +412,90 @@
     <footer class="footer-section py-5">
       <div class="container">
         <div class="row">
-          <!-- Footer content -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-info">
+              <h5>Salon<span>JC</span></h5>
+              <p class="mt-3">
+                Your premier beauty destination in Pallawela, offering
+                professional services and exceptional care since 2025.
+              </p>
+              <div class="social-links mt-4">
+                <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-links">
+              <h5>Quick Links</h5>
+              <ul class="list-unstyled mt-3">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-services">
+              <h5>Our Services</h5>
+              <ul class="list-unstyled mt-3">
+                <li><a href="services.html#bridal">Bridal Dressing</a></li>
+                <li><a href="services.html#facial">Facial Treatments</a></li>
+                <li><a href="services.html#hair">Hair Styling</a></li>
+                <li><a href="services.html#makeup">Makeup Services</a></li>
+                <li><a href="services.html#special">Special Occasions</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-contact">
+              <h5>Contact Info</h5>
+              <ul class="list-unstyled contact-info mt-3">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Kaloliya Rd, Pallawela, Sri Lanka</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>071 414 7628</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>salonjc2092@gmail.com</span>
+                </li>
+              </ul>
+              <div class="business-hours mt-4">
+                <h5>Business Hours</h5>
+                <ul class="list-unstyled hours-list mt-3">
+                  <li>Monday - Saturday: 9:00 AM - 8:00 PM</li>
+                  <li>Sunday: 10:00 AM - 6:00 PM</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="footer-bottom text-center">
+              <hr class="footer-divider" />
+              <p class="mb-0">&copy; 2025 SalonJC. All rights reserved.</p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

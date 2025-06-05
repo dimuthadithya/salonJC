@@ -1,0 +1,185 @@
+/* Registration Section Styles */
+.registration-section {
+    padding: 120px 0 80px;
+    background: linear-gradient(rgba(var(--black-rgb), 0.95), rgba(var(--black-rgb), 0.95)),
+                url('../img/about/background.jpg') center/cover fixed;
+    min-height: 100vh;
+    color: var(--light-color);
+}
+
+.registration-card {
+    background: rgba(var(--light-color-rgb), 0.05);
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid rgba(var(--highlight-color-rgb), 0.1);
+    margin-bottom: 2rem;
+}
+
+.registration-card h2 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: var(--light-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    background: rgba(var(--light-color-rgb), 0.05);
+    border: 2px solid rgba(var(--primary-color-rgb), 0.3);
+    color: var(--light-color);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(var(--light-color-rgb), 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--highlight-color-rgb), 0.15);
+    color: var(--light-color);
+}
+
+.form-control::placeholder {
+    color: rgba(var(--light-color-rgb), 0.5);
+}
+
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--accent-color);
+}
+
+.form-check-label {
+    color: rgba(var(--light-color-rgb), 0.8);
+    font-size: 0.9rem;
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.terms-link:hover {
+    color: var(--accent-color);
+}
+
+.btn-register {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 500;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.login-text {
+    color: rgba(var(--light-color-rgb), 0.8);
+    font-size: 0.9rem;
+}
+
+.login-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-link:hover {
+    color: var(--accent-color);
+}
+
+/* Benefits Card Styles */
+.benefits-card {
+    background: rgba(var(--light-color-rgb), 0.05);
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid rgba(var(--highlight-color-rgb), 0.1);
+    height: 100%;
+}
+
+.benefits-card h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.benefits-list li:last-child {
+    margin-bottom: 0;
+}
+
+.benefits-list i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+}
+
+.benefits-list h4 {
+    color: var(--light-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.benefits-list p {
+    color: rgba(var(--light-color-rgb), 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+    .benefits-card {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .registration-section {
+        padding: 100px 0 60px;
+    }
+
+    .registration-card,
+    .benefits-card {
+        padding: 2rem;
+    }
+}
