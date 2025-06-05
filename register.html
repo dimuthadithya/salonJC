@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Account - SalonJC</title>
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Salon<span>JC</span></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="login.html">
+                <i class="fas fa-user"></i> Login</a
+              >
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a href="booking.html" class="nav-link book-now-nav">Book Now</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section class="registration-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="registration-card">
+              <h2 class="text-center mb-4">Create Your Account</h2>
+              <form id="registrationForm" class="registration-form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="firstName">First Name *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lastName">Last Name *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="email">Email Address *</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="phone">Phone Number *</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="password">Password *</label>
+                      <div class="password-input">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          required
+                        />
+                        <i class="fas fa-eye toggle-password"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="confirmPassword">Confirm Password *</label>
+                      <div class="password-input">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="confirmPassword"
+                          required
+                        />
+                        <i class="fas fa-eye toggle-password"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="dateOfBirth">Date of Birth</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="dateOfBirth"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="gender">Gender</label>
+                      <select class="form-control" id="gender">
+                        <option value="">Select Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not">Prefer not to say</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="termsCheck"
+                        required
+                      />
+                      <label class="form-check-label" for="termsCheck">
+                        I agree to the
+                        <a href="#" class="terms-link">Terms & Conditions</a>
+                        and
+                        <a href="#" class="terms-link">Privacy Policy</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-register w-100">
+                      Create Account
+                    </button>
+                  </div>
+                  <div class="col-12 text-center mt-3">
+                    <p class="login-text">
+                      Already have an account?
+                      <a href="login.html" class="login-link">Login here</a>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Benefits Section -->
+          <div class="col-lg-4">
+            <div class="benefits-card">
+              <h3>Member Benefits</h3>
+              <ul class="benefits-list">
+                <li>
+                  <i class="fas fa-calendar-check"></i>
+                  <div>
+                    <h4>Easy Online Booking</h4>
+                    <p>Book your appointments anytime, anywhere</p>
+                  </div>
+                </li>
+                <li>
+                  <i class="fas fa-bell"></i>
+                  <div>
+                    <h4>Appointment Reminders</h4>
+                    <p>Never miss your scheduled appointments</p>
+                  </div>
+                </li>
+                <li>
+                  <i class="fas fa-tag"></i>
+                  <div>
+                    <h4>Special Member Discounts</h4>
+                    <p>Exclusive offers and promotions for members</p>
+                  </div>
+                </li>
+                <li>
+                  <i class="fas fa-gift"></i>
+                  <div>
+                    <h4>Birthday Offers</h4>
+                    <p>Special treats on your special day</p>
+                  </div>
+                </li>
+                <li>
+                  <i class="fas fa-history"></i>
+                  <div>
+                    <h4>Service History Tracking</h4>
+                    <p>Keep track of all your beauty treatments</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-info">
+              <h5>Salon<span>JC</span></h5>
+              <p class="mt-3">
+                Your premier beauty destination in Pallawela, offering
+                professional services and exceptional care since 2025.
+              </p>
+              <div class="social-links mt-4">
+                <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-links">
+              <h5>Quick Links</h5>
+              <ul class="list-unstyled mt-3">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <div class="footer-contact">
+              <h5>Contact Info</h5>
+              <ul class="list-unstyled contact-info mt-3">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i> No 48, Pahala Galgamuwa,
+                  Galgamuwa
+                </li>
+                <li><i class="fas fa-phone"></i> 076 575 6616</li>
+                <li><i class="fas fa-envelope"></i> salonjc2092@gmail.com</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-hours">
+              <h5>Opening Hours</h5>
+              <ul class="list-unstyled hours-list mt-3">
+                <li>Monday - Saturday: 9:00 AM - 8:00 PM</li>
+                <li>Sunday: 10:00 AM - 6:00 PM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="footer-bottom text-center">
+              <hr class="footer-divider" />
+              <p class="mb-0">&copy; 2025 SalonJC. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/register.js"></script>
+  </body>
+</html>
