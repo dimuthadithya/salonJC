@@ -278,4 +278,26 @@ $(document).ready(function () {
       $(this).find('.icon-box').css('transform', 'rotateY(0)');
     }
   );
+
+  // Scroll to Top Button functionality
+  const scrollBtn = $('#scrollToTop');
+
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      scrollBtn.addClass('visible');
+    } else {
+      scrollBtn.removeClass('visible');
+    }
+  });
+
+  scrollBtn.click(function () {
+    $('html, body').animate(
+      {
+        scrollTop: 0
+      },
+      800,
+      'easeInOutQuad'
+    );
+    return false;
+  });
 });

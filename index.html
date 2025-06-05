@@ -38,6 +38,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
     <!-- jQuery UI CSS -->
     <link
       rel="stylesheet"
@@ -68,7 +71,7 @@
               <a class="nav-link active" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#services">Services</a>
+              <a class="nav-link" href="services.html">Services</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About Us</a>
@@ -76,8 +79,13 @@
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"
+                ><i class="fas fa-user"></i> Login</a
+              >
+            </li>
             <li class="nav-item ms-lg-2">
-              <a href="#appointment" class="nav-link book-now-nav">Book Now</a>
+              <a href="booking.html" class="nav-link book-now-nav">Book Now</a>
             </li>
           </ul>
         </div>
@@ -271,7 +279,7 @@
         </div>
 
         <!-- Gallery Categories -->
-        <div class="gallery-filter mb-5">
+        <div class="gallery-filter mb-5 justify-content-center d-flex">
           <ul
             class="nav nav-pills justify-content-center"
             id="gallery-tabs"
@@ -1076,6 +1084,11 @@
         </div>
       </div>
     </footer>
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>

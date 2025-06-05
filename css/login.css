@@ -1,0 +1,152 @@
+/* Login Page Styles */
+.login-section {
+    padding: 120px 0 60px;
+    min-height: calc(100vh - 300px);
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('../img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.login-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.login-card h1 {
+    color: #333;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.login-form .input-group-text {
+    background-color: #c5a491;
+    border: none;
+    color: white;
+}
+
+.login-form .form-control {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+}
+
+.login-form .form-control:focus {
+    border-color: #c5a491;
+    box-shadow: 0 0 0 0.2rem rgba(197, 164, 145, 0.25);
+}
+
+.login-form .btn-primary {
+    background-color: #c5a491;
+    border: none;
+    padding: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-form .btn-primary:hover {
+    background-color: #b08e7a;
+    transform: translateY(-2px);
+}
+
+.login-form .form-check-input:checked {
+    background-color: #c5a491;
+    border-color: #c5a491;
+}
+
+.forgot-password {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #c5a491;
+}
+
+.register-section {
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.register-section .btn-outline-primary {
+    color: #c5a491;
+    border-color: #c5a491;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.register-section .btn-outline-primary:hover {
+    background-color: #c5a491;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Benefits Card Styles */
+.benefits-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-card h2 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.benefits-list li:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.benefits-list i {
+    color: #c5a491;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+}
+
+.benefits-list h3 {
+    color: #333;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.benefits-list p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .login-section {
+        padding: 100px 0 40px;
+    }
+    
+    .login-card, .benefits-card {
+        padding: 1.5rem;
+    }
+}

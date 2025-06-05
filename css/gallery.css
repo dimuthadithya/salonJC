@@ -1,0 +1,49 @@
+/* Gallery Filter Styles */
+.gallery-filter .nav-pills {
+    background: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 50px;
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.gallery-filter .nav-pills .nav-link {
+    color: var(--light-color);
+    background: transparent;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.gallery-filter .nav-pills .nav-link:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.gallery-filter .nav-pills .nav-link.active {
+    background: var(--primary-color);
+    color: var(--dark-color);
+    border-color: var(--primary-color);
+}
+
+.gallery-filter .nav-pills .nav-link i {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .gallery-filter .nav-pills {
+        flex-direction: column;
+        border-radius: 15px;
+        gap: 0.5rem;
+    }
+
+    .gallery-filter .nav-pills .nav-link {
+        width: 100%;
+        text-align: center;
+    }
+}
