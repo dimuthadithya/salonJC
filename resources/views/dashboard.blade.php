@@ -1,4 +1,7 @@
 <x-app-layout>
+    @push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+    @endpush
     @section('content')
     <!-- Dashboard Section -->
     <section class="dashboard-section">

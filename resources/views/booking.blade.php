@@ -1,5 +1,8 @@
 <x-app-layout>
-
+    @push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}">
+    @endpush
+    @section('content')
     <main>
         <!-- Page Header -->
         <header class="booking-header">
@@ -295,4 +298,5 @@
             </div>
         </div>
     </div>
+    @endsection
 </x-app-layout>
