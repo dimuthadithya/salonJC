@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <img
-                        src="img/about/salon-interior.jpg"
+                        src="{{ asset('assets/img/about/salon-interior.jpg') }}"
                         alt="Salon Interior"
                         class="img-fluid rounded" />
                 </div>
@@ -53,7 +53,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="team-member">
                         <img
-                            src="img/team/stylist-1.jpg"
+                            src="{{ asset('assets/img/team/stylist-1.jpg') }}"
                             alt="Chanu Ranasinghe"
                             class="img-fluid rounded-circle mb-3" />
                         <h3>Chanu Ranasinghe</h3>
@@ -69,7 +69,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="team-member">
                         <img
-                            src="img/team/stylist-2.jpg"
+                            src="{{ asset('assets/img/team/stylist-2.jpg') }}"
                             alt="Sarah Silva"
                             class="img-fluid rounded-circle mb-3" />
                         <h3>Sarah Silva</h3>
@@ -84,7 +84,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="team-member">
                         <img
-                            src="img/team/stylist-3.jpg"
+                            src="{{ asset('assets/img/team/stylist-3.jpg') }}"
                             alt="Maya Perera"
                             class="img-fluid rounded-circle mb-3" />
                         <h3>Maya Perera</h3>
@@ -99,7 +99,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="team-member">
                         <img
-                            src="img/team/stylist-4.jpg"
+                            src="{{ asset('assets/img/team/stylist-4.jpg') }}"
                             alt="Lisa Fernando"
                             class="img-fluid rounded-circle mb-3" />
                         <h3>Lisa Fernando</h3>
@@ -197,7 +197,7 @@
                 </div>
                 <div class="col-md-6">
                     <img
-                        src="img/about/service-1.jpg"
+                        src="{{ asset('assets/img/about/service-1.jpg') }}"
                         alt="Salon Facilities"
                         class="img-fluid rounded" />
                 </div>

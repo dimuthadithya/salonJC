@@ -258,7 +258,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/all-1.jpg"
+                                    src="{{ asset('assets/img/gallery/all-1.jpg') }}"
                                     alt="Gallery Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -279,7 +279,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/all-2.jpg"
+                                    src="{{ asset('assets/img/gallery/all-2.jpg') }}"
                                     alt="Gallery Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -287,7 +287,7 @@
                                         <h4>Hair Styling</h4>
                                         <p>Modern and Trendy</p>
                                         <a
-                                            href="img/gallery/all-2.jpg"
+                                            href="{{ asset("assets/img/gallery/all-2.jpg") }}"
                                             class="view-btn"
                                             data-lightbox="gallery">
                                             <i
@@ -300,7 +300,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/all-3.jpg"
+                                    src="{{ asset('assets/img/gallery/all-3.jpg') }}"
                                     alt="Gallery Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -327,7 +327,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/bridal-1.jpg"
+                                    src="{{ asset('assets/img/gallery/bridal-1.jpg') }}"
                                     alt="Bridal Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -348,7 +348,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/bridal-2.jpg"
+                                    src="{{ asset('assets/img/gallery/bridal-2.jpg') }}"
                                     alt="Bridal Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -369,7 +369,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/bridal-3.jpg"
+                                    src="{{ asset('assets/img/gallery/bridal-3.jpg') }}"
                                     alt="Bridal Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -396,7 +396,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/hair-1.jpg"
+                                    src="{{ asset('assets/img/gallery/hair-1.jpg') }}"
                                     alt="Hair Styling Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -417,7 +417,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/hair-2.jpg"
+                                    src="{{ asset('assets/img/gallery/hair-2.jpg') }}"
                                     alt="Hair Styling Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -438,7 +438,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/hair-3.jpg"
+                                    src="{{ asset('assets/img/gallery/hair-3.jpg') }}"
                                     alt="Hair Styling Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -465,7 +465,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/makeup-1.jpg"
+                                    src="{{ asset('assets/img/gallery/makeup-1.jpg') }}"
                                     alt="Makeup Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -486,7 +486,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/makeup-2.jpg"
+                                    src="{{ asset('assets/img/gallery/makeup-2.jpg') }}"
                                     alt="Makeup Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -507,7 +507,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="gallery-item">
                                 <img
-                                    src="img/gallery/makeup-3.jpg"
+                                    src="{{ asset('assets/img/gallery/makeup-3.jpg') }}"
                                     alt="Makeup Image"
                                     class="img-fluid" />
                                 <div class="gallery-overlay">
@@ -580,16 +580,16 @@
                 <div class="col-lg-6">
                     <div class="about-image">
                         <img
-                            src="img/about/salon-interior.jpg"
+                            src="{{ asset('assets/img/about/salon-interior.jpg') }}"
                             alt="Salon Interior"
                             class="img-fluid rounded-3 main-image" />
                         <div class="image-grid mt-4">
                             <img
-                                src="img/about/service-1.jpg"
+                                src="{{ asset('assets/img/about/service-1.jpg') }}"
                                 alt="Beauty Service"
                                 class="img-fluid rounded-3" />
                             <img
-                                src="img/about/service-2.jpg"
+                                src="{{ asset('assets/img/about/service-2.jpg') }}"
                                 alt="Beauty Service"
                                 class="img-fluid rounded-3" />
                         </div>
@@ -611,7 +611,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <img
-                                src="img/team/stylist-1.jpg"
+                                src="{{ asset('assets/img/team/stylist-1.jpg') }}"
                                 alt="Team Member"
                                 class="img-fluid" />
                             <div class="social-links">
@@ -630,7 +630,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <img
-                                src="img/team/stylist-2.jpg"
+                                src="{{ asset('assets/img/team/stylist-2.jpg') }}"
                                 alt="Team Member"
                                 class="img-fluid" />
                             <div class="social-links">
@@ -649,7 +649,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <img
-                                src="img/team/stylist-3.jpg"
+                                src="{{ asset('assets/img/team/stylist-3.jpg') }}"
                                 alt="Team Member"
                                 class="img-fluid" />
                             <div class="social-links">
@@ -668,7 +668,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <img
-                                src="img/team/stylist-4.jpg"
+                                src="{{ asset('assets/img/team/stylist-4.jpg') }}"
                                 alt="Team Member"
                                 class="img-fluid" />
                             <div class="social-links">
@@ -700,7 +700,7 @@
                         <div class="testimonial-card">
                             <div class="testimonial-img">
                                 <img
-                                    src="img/testimonials/client-1.jpg"
+                                    src="{{ asset('assets/img/testimonials/client-1.jpg') }}"
                                     alt="Client"
                                     class="img-fluid rounded-circle" />
                             </div>
@@ -727,7 +727,7 @@
                         <div class="testimonial-card">
                             <div class="testimonial-img">
                                 <img
-                                    src="img/testimonials/client-2.jpg"
+                                    src="{{ asset('assets/img/testimonials/client-2.jpg') }}"
                                     alt="Client"
                                     class="img-fluid rounded-circle" />
                             </div>
@@ -753,7 +753,7 @@
                         <div class="testimonial-card">
                             <div class="testimonial-img">
                                 <img
-                                    src="img/testimonials/client-3.jpg"
+                                    src="{{ asset('assets/img/testimonials/client-3.jpg') }}"
                                     alt="Client"
                                     class="img-fluid rounded-circle" />
                             </div>
