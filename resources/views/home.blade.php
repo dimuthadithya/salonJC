@@ -24,8 +24,8 @@
                     </div>
                     <div
                         class="hero-cta mb-5 d-flex justify-content-center align-items-center gap-4">
-                        <a href="#appointment" class="book-now-btn">Book Your Appointment Now</a>
-                        <a href="#services" class="services-btn">View Our Services</a>
+                        <a href="{{ route('booking') }}" class="book-now-btn">Book Your Appointment Now</a>
+                        <a href="{{ route('services') }}" class="services-btn">View Our Services</a>
                     </div>
                     <div class="hero-badges">
                         <div
