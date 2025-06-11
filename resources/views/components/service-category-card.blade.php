@@ -1,18 +1,12 @@
-<div class="col-lg-4 col-md-6">
-    <div class="service-card">
-        <div class="service-icon">
-            <i class="fas fa-crown"></i>
-        </div>
-        <h3>Bridal Package</h3>
-        <p class="mb-4 text-white-50">
-            Complete bridal makeup, hair styling, and
-            dressing service. Make your special day even
-            more beautiful.
-        </p>
-        <div class="service-price mb-3">
-            <span class="price">Rs. 25,000</span>
-            <span class="duration">3-4 hours</span>
-        </div>
-        <a href="#appointment" class="service-btn">Book Appointment</a>
+<div class="service-card {{ $isDark ? 'bg-dark' : '' }}">
+    <div class="service-icon">
+        <i class="{{ $icon }}"></i>
     </div>
+    <h3>{{ $title }}</h3>
+    <p class="mb-4 text-white-50">{{ $description }}</p>
+    <div class="price-badge mb-3 text-white-50">
+        <span>Starting at</span>
+        <span class="price">LKR {{ number_format($startPrice, 2) }}</span>
+    </div>
+    <a href="{{ route('services') }}#{{ $categoryId }}" class="service-btn">View Services</a>
 </div>

@@ -69,7 +69,17 @@
                 </p>
             </div>
             <div class="row g-4">
-
+                @foreach($categories as $category)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <x-service-category-card
+                        :title="$category->name"
+                        :description="$category->description"
+                        :icon="$category->icon_class"
+                        :start-price="$category->start_price"
+                        :category-id="Str::slug($category->name)"
+                        :is-dark="$loop->index % 2 === 1" />
+                </div>
+                @endforeach
             </div>
         </div>
     </section>

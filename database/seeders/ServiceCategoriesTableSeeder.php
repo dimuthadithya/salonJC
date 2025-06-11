@@ -18,7 +18,7 @@ class ServiceCategoriesTableSeeder extends Seeder
                 'icon_class' => 'fas fa-crown',
                 'description' => 'Make Your Special Day Perfect',
                 'long_description' => 'Complete bridal makeup, hair styling, and dressing service. Make your special day even more beautiful. Transform into the bride of your dreams with our comprehensive bridal services. Our expert team ensures you look and feel absolutely stunning.',
-                'start_price' => 25000.00,
+                'start_price' => 35000.00,
                 'status' => true
             ],
             [
@@ -26,7 +26,7 @@ class ServiceCategoriesTableSeeder extends Seeder
                 'icon_class' => 'fas fa-spa',
                 'description' => 'Advanced Facial Treatments',
                 'long_description' => 'Premium facial treatment with gold-infused products. Includes deep cleansing, massage, and mask. Our expert estheticians use premium products and cutting-edge techniques to give you that perfect, glowing complexion.',
-                'start_price' => 5000.00,
+                'start_price' => 4000.00,
                 'status' => true
             ],
             [
@@ -42,7 +42,7 @@ class ServiceCategoriesTableSeeder extends Seeder
                 'icon_class' => 'fas fa-paint-brush',
                 'description' => 'Professional Makeup',
                 'long_description' => 'Professional makeup application for any occasion. Using premium beauty products. Our makeup artists create flawless looks that enhance your natural beauty using premium products and techniques.',
-                'start_price' => 3500.00,
+                'start_price' => 5000.00,
                 'status' => true
             ],
             [
@@ -50,7 +50,7 @@ class ServiceCategoriesTableSeeder extends Seeder
                 'icon_class' => 'fas fa-magic',
                 'description' => 'Premium Hair Coloring',
                 'long_description' => 'Premium hair coloring service with ammonia-free products. Includes styling and consultation for the perfect color match.',
-                'start_price' => 4500.00,
+                'start_price' => 2500.00,
                 'status' => true
             ],
             [

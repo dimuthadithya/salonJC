@@ -10,7 +10,9 @@ class ServiceCategoryCard extends Component
 {
     public function __construct(
         public string $title = '',
-        public string $subtitle = '',
+        public string $description = '',
+        public string $icon = '',
+        public float $startPrice = 0.0,
         public string $categoryId = '',
         public bool $isDark = false
     ) {}
