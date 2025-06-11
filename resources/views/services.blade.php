@@ -31,19 +31,12 @@
             <div class="row">
                 @foreach($bridalServices as $service)
                 <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="service-package-card">
-                        <div class="package-header">
-                            <h3>{{ $service->name }}</h3>
-                            <span class="price">Starting from LKR {{ number_format($service->price, 2) }}</span>
-                            <span class="duration">Duration: {{ $service->duration }} mins</span>
-                        </div>
-                        <div class="package-content">
-                            {!! $service->description !!}
-                            <button class="btn btn-book" data-package="{{ Str::slug($service->name) }}">
-                                Book Package
-                            </button>
-                        </div>
-                    </div>
+                    <x-bridal-service-card
+                        :title="$service->name"
+                        :price="'LKR ' . number_format($service->price, 2)"
+                        :duration="$service->duration . ' mins'"
+                        :features="$service->features"
+                        :package-type="Str::slug($service->name)" />
                 </div>
                 @endforeach
             </div>

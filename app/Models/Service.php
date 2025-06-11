@@ -15,6 +15,7 @@ class Service extends Model
     protected $fillable = [
         'name',
         'description',
+        'features',
         'duration',
         'price',
         'category_id',
@@ -24,7 +25,8 @@ class Service extends Model
     protected $casts = [
         'price' => 'decimal:2',
         'duration' => 'integer',
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'features' => 'array'
     ];
 
     public function category(): BelongsTo
