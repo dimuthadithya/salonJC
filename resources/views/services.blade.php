@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('content')
-    <main>
+    <main class="bg-dark">
         <!-- Page Header -->
         <header class="service-header">
             <div class="container">
