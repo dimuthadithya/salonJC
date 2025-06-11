@@ -111,56 +111,9 @@
                     </div>
 
                     <!-- Facial Service Cards -->
-                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h4>Deep Cleansing Facial</h4>
-                            <p class="text-white-50">Complete pore cleansing and purification treatment</p>
-                            <div class="service-price">
-                                <span>LKR 4,500</span>
-                                <small>60 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
+                    <x-service-card></x-service-card>
 
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-sun"></i>
-                            </div>
-                            <h4>Whitening Facial</h4>
-                            <p class="text-white-50">Specialized treatment for skin brightening</p>
-                            <div class="service-price">
-                                <span>LKR 5,500</span>
-                                <small>75 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
 
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-flask"></i>
-                            </div>
-                            <h4>Acne Treatment</h4>
-                            <p class="text-white-50">Specialized care for acne-prone skin</p>
-                            <div class="service-price">
-                                <span>LKR 4,000</span>
-                                <small>60 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Hair Services -->
@@ -173,74 +126,8 @@
                     </div>
 
                     <!-- Hair Service Cards -->
-                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-cut"></i>
-                            </div>
-                            <h4>Haircut & Styling</h4>
-                            <p class="text-white-50">Professional cut and style by expert stylists</p>
-                            <div class="service-price">
-                                <span>From LKR 2,500</span>
-                                <small>45-60 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
+                    <x-service-card></x-service-card>
 
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                            <h4>Hair Coloring</h4>
-                            <p class="text-white-50">Full color, highlights, or balayage</p>
-                            <div class="service-price">
-                                <span>From LKR 8,500</span>
-                                <small>2-4 hours</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <h4>Hair Treatments</h4>
-                            <p class="text-white-50">Rebonding, perming, and keratin treatments</p>
-                            <div class="service-price">
-                                <span>From LKR 12,000</span>
-                                <small>3-5 hours</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h4>Hair Spa</h4>
-                            <p class="text-white-50">Luxury hair spa and conditioning treatments</p>
-                            <div class="service-price">
-                                <span>LKR 4,500</span>
-                                <small>90 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Makeup Services -->
@@ -253,74 +140,8 @@
                     </div>
 
                     <!-- Makeup Service Cards -->
-                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-magic"></i>
-                            </div>
-                            <h4>Party Makeup</h4>
-                            <p class="text-white-50">Perfect look for any special occasion</p>
-                            <div class="service-price">
-                                <span>LKR 5,000</span>
-                                <small>60 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
+                    <x-service-card></x-service-card>
 
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-camera"></i>
-                            </div>
-                            <h4>Photoshoot Makeup</h4>
-                            <p class="text-white-50">Camera-ready makeup for perfect photos</p>
-                            <div class="service-price">
-                                <span>LKR 7,500</span>
-                                <small>90 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <h4>Makeup Lessons</h4>
-                            <p class="text-white-50">Learn professional makeup techniques</p>
-                            <div class="service-price">
-                                <span>LKR 8,500</span>
-                                <small>2 hours</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h4>Professional Makeup</h4>
-                            <p class="text-white-50">Full professional makeup service</p>
-                            <div class="service-price">
-                                <span>LKR 6,500</span>
-                                <small>75 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Additional Services -->
@@ -333,74 +154,8 @@
                     </div>
 
                     <!-- Additional Service Cards -->
-                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h4>Eyebrow Shaping</h4>
-                            <p class="text-white-50">Threading and eyebrow design</p>
-                            <div class="service-price">
-                                <span>LKR 1,000</span>
-                                <small>20 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
+                    <x-service-card></x-service-card>
 
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-hand-sparkles"></i>
-                            </div>
-                            <h4>Manicure & Pedicure</h4>
-                            <p class="text-white-50">Complete nail care treatment</p>
-                            <div class="service-price">
-                                <span>LKR 3,500</span>
-                                <small>90 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h4>Body Treatments</h4>
-                            <p class="text-white-50">Relaxing body spa treatments</p>
-                            <div class="service-price">
-                                <span>From LKR 5,500</span>
-                                <small>90 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h4>Beauty Consultation</h4>
-                            <p class="text-white-50">Professional beauty advice and planning</p>
-                            <div class="service-price">
-                                <span>LKR 2,500</span>
-                                <small>45 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
