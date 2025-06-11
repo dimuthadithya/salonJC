@@ -37,9 +37,19 @@ class ServiceImagesTableSeeder extends Seeder
         $this->createServiceImage('Body Treatments', 'fas fa-spa', true);
         $this->createServiceImage('Beauty Consultation', 'fas fa-comments', true);
 
-        // Bridal Services Icons (using appropriate icons)
+        // Bridal Services Icons
         $this->createServiceImage('Complete Bridal Package', 'fas fa-crown', true);
         $this->createServiceImage('Engagement Package', 'fas fa-ring', true);
+
+        // Luxury Beauty Services Icons
+        $this->createServiceImage('24K Gold Facial', 'fas fa-sun', true);
+        $this->createServiceImage('Gold & Pearl Brightening', 'fas fa-star', true);
+        $this->createServiceImage('Diamond Microdermabrasion', 'fas fa-gem', true);
+        $this->createServiceImage('Diamond Radiance Package', 'fas fa-sparkles', true);
+        $this->createServiceImage('Royal Indulgence Package', 'fas fa-crown', true);
+        $this->createServiceImage('Queen\'s Retreat Package', 'fas fa-crown', true);
+        $this->createServiceImage('Caviar Luxe Facial', 'fas fa-clock', true);
+        $this->createServiceImage('Caviar Rejuvenation Plus', 'fas fa-clock-rotate-left', true);
     }
 
     private function createServiceImage($serviceName, $iconClass, $isPrimary = false)
