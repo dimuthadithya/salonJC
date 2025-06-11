@@ -69,116 +69,17 @@
                 </p>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <h3>Bridal Package</h3>
-                        <p class="mb-4 text-white-50">
-                            Complete bridal makeup, hair styling, and
-                            dressing service. Make your special day even
-                            more beautiful.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">Rs. 25,000</span>
-                            <span class="duration">3-4 hours</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
+                @foreach($categories as $category)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <x-service-category-card
+                        :title="$category->name"
+                        :description="$category->description"
+                        :icon="$category->icon_class"
+                        :start-price="$category->start_price"
+                        :category-id="Str::slug($category->name)"
+                        :is-dark="$loop->index % 2 === 1" />
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card featured">
-                        <div class="featured-label">Popular</div>
-                        <div class="service-icon">
-                            <i class="fas fa-spa"></i>
-                        </div>
-                        <h3>Luxury Facial</h3>
-                        <p class="mb-4 text-white-50">
-                            Premium facial treatment with gold-infused
-                            products. Includes deep cleansing, massage, and
-                            mask.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">Rs. 5,000</span>
-                            <span class="duration">90 min</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-cut"></i>
-                        </div>
-                        <h3>Hair Styling</h3>
-                        <p class="mb-4 text-white-50">
-                            Professional haircut, styling, and treatment by
-                            our expert stylists. Includes consultation.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">Rs. 2,500</span>
-                            <span class="duration">60 min</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h3>Makeup Service</h3>
-                        <p class="mb-4 text-white-50">
-                            Professional makeup application for any
-                            occasion. Using premium beauty products.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">Rs. 3,500</span>
-                            <span class="duration">45 min</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-magic"></i>
-                        </div>
-                        <h3>Hair Coloring</h3>
-                        <p class="mb-4 text-white-50">
-                            Premium hair coloring service with ammonia-free
-                            products. Includes styling.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">From Rs. 4,500</span>
-                            <span class="duration">120 min</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>Body Treatment</h3>
-                        <p class="mb-4 text-white-50">
-                            Luxurious body treatment with premium oils and
-                            creams. Includes massage.
-                        </p>
-                        <div class="service-price mb-3">
-                            <span class="price">Rs. 6,000</span>
-                            <span class="duration">90 min</span>
-                        </div>
-                        <a href="#appointment" class="service-btn">Book Appointment</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
