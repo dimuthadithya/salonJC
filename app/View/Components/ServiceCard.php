@@ -14,7 +14,8 @@ class ServiceCard extends Component
         public string $price = '',
         public string $duration = '',
         public string $icon = '',
-        public bool $showBookButton = true
+        public bool $showBookButton = true,
+        public int $serviceId = 0
     ) {}
 
     /**

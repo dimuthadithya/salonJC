@@ -36,7 +36,8 @@
                         :price="'LKR ' . number_format($service->price, 2)"
                         :duration="$service->duration . ' mins'"
                         :features="$service->features"
-                        :package-type="Str::slug($service->name)" />
+                        :package-type="Str::slug($service->name)"
+                        :service-id="$service->id" />
                 </div>
                 @endforeach
             </div>
@@ -62,7 +63,8 @@
                         :description="$service->description"
                         :price="'LKR ' . number_format($service->price, 2)"
                         :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-spa'" />
+                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-spa'"
+                        :service-id="$service->id" />
                 </div>
                 @endforeach
             </div>
@@ -83,7 +85,8 @@
                         :description="$service->description"
                         :price="'LKR ' . number_format($service->price, 2)"
                         :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-cut'" />
+                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-cut'"
+                        :service-id="$service->id" />
                 </div>
                 @endforeach
             </div>
@@ -104,7 +107,8 @@
                         :description="$service->description"
                         :price="'LKR ' . number_format($service->price, 2)"
                         :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-magic'" />
+                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-magic'"
+                        :service-id="$service->id" />
                 </div>
                 @endforeach
             </div>
@@ -125,7 +129,8 @@
                         :description="$service->description"
                         :price="'LKR ' . number_format($service->price, 2)"
                         :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-star'" />
+                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-star'"
+                        :service-id="$service->id" />
                 </div>
                 @endforeach
             </div>

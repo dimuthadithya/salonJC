@@ -13,7 +13,8 @@ class BridalServiceCard extends Component
         public string $price = '',
         public string $duration = '',
         public array $features = [],
-        public string $packageType = ''
+        public string $packageType = '',
+        public int $serviceId = 0
     ) {}
 
     /**

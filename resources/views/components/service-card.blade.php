@@ -10,6 +10,6 @@
     </div>
 
     @if($showBookButton)
-    <button class="btn btn-book">Book Now</button>
+    <a href="{{ route('booking') }}?service={{ $serviceId }}" class="btn btn-book">Book Now</a>
     @endif
 </div>

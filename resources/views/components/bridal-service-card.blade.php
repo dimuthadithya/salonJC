@@ -12,9 +12,9 @@
             </li>
             @endforeach
         </ul>
-        <button class="btn btn-book" data-package="{{ $packageType }}">
+        <a href="{{ route('booking') }}?service={{ $serviceId }}" class="btn btn-book" data-package="{{ $packageType }}">
             Book Package
-        </button>
+        </a>
     </div>
 </div>
 
