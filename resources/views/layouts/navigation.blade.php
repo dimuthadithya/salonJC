@@ -20,9 +20,6 @@
                   <li class="nav-item">
                       <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About Us</a>
                   </li>
-                  <li class="nav-item">
-                      <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
-                  </li>
                   @guest
                   <li class="nav-item">
                       <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -32,6 +29,9 @@
                   </li>
                   @endguest
                   @auth
+                  <li class="nav-item">
+                      <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
+                  </li>
                   <li class="nav-item">
                       <form action="{{ route('logout') }}" method="post">
                           @csrf
