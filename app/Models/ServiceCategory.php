@@ -12,12 +12,16 @@ class ServiceCategory extends Model
 
     protected $fillable = [
         'name',
+        'icon_class',
         'description',
+        'long_description',
+        'start_price',
         'status'
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'start_price' => 'decimal:2'
     ];
 
     public function services(): HasMany
