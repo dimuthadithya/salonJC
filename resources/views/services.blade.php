@@ -129,24 +129,6 @@
                     <div
                         class="col-lg-3 col-md-6 mb-4"
                         data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-clock-rotate-left"></i>
-                            </div>
-                            <h4>Anti-aging Treatment</h4>
-                            <p class="text-white-50">Advanced treatment to reduce fine lines and wrinkles</p>
-                            <div class="service-price">
-                                <span>LKR 6,500</span>
-                                <small>90 mins</small>
-                            </div>
-                            <button class="btn btn-book">Book Now</button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-lg-3 col-md-6 mb-4"
-                        data-aos="fade-up"
                         data-aos-delay="200">
                         <div class="service-card">
                             <div class="service-icon">
