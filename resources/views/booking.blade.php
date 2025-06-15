@@ -122,20 +122,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="stylist">Preferred Stylist (Optional)</label>
-                                        <select class="form-control" id="stylist" name="stylist">
-                                            <option value="">No preference</option>
-                                            @foreach($stylists as $stylist)
-                                            <option value="{{ $stylist->id }}" {{ old('stylist') == $stylist->id ? 'selected' : '' }}>
-                                                {{ $stylist->name }} - {{ $stylist->specialization }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="requirements">Special Requirements or Allergies</label>

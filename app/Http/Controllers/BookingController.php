@@ -34,13 +34,10 @@ class BookingController extends Controller
             }
         }
 
-        $stylists = Specialist::all();
         $timeSlots = $this->getTimeSlots();
-
         return view('booking', compact(
             'categories',
             'services',
-            'stylists',
             'timeSlots',
             'selectedService',
             'selectedCategory'
@@ -70,7 +67,7 @@ class BookingController extends Controller
             'service_id' => $request->service,
             'appointment_date' => $request->appointmentDate,
             'appointment_time' => $request->appointmentTime,
-            'stylist_id' => $request->stylist,
+            'stylist_id' => null,
             'special_requirements' => $request->requirements,
             'base_price' => $service->price,
             'addons_price' => 0,
