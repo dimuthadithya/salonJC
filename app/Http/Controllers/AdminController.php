@@ -7,6 +7,8 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -50,5 +52,111 @@ class AdminController extends Controller
             'recentBookings',
             'popularServices'
         ));
+    }
+
+    public function services()
+    {
+        $services = Service::query()
+            ->withCount('bookings')
+            ->with(['category', 'images'])
+            ->select('services.*')
+            ->selectRaw('SUM(CASE WHEN bookings.payment_status = "paid" THEN bookings.total_price ELSE 0 END) as revenue')
+            ->leftJoin('bookings', 'services.id', '=', 'bookings.service_id')
+            ->groupBy(
+                'services.id',
+                'services.name',
+                'services.description',
+                'services.features',
+                'services.duration',
+                'services.price',
+                'services.category_id',
+                'services.status',
+                'services.created_at',
+                'services.updated_at'
+            )->orderBy('services.name')
+            ->get();
+
+        return view('admin.services.index', compact('services'));
+    }
+
+    public function createService()
+    {
+        $categories = ServiceCategory::all();
+        return view('admin.services.create', compact('categories'));
+    }
+
+    public function storeService(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'features' => 'required|array',
+            'duration' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:service_categories,id',
+            'status' => 'boolean',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $service = Service::create($validated);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('services', 'public');
+                $service->images()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('admin.services')->with('success', 'Service created successfully');
+    }
+
+    public function editService(Service $service)
+    {
+        $categories = ServiceCategory::all();
+        return view('admin.services.edit', compact('service', 'categories'));
+    }
+
+    public function updateService(Request $request, Service $service)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'features' => 'required|array',
+            'duration' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:service_categories,id',
+            'status' => 'boolean',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $service->update($validated);
+
+        if ($request->hasFile('images')) {
+            // Delete old images if replace_images is checked
+            if ($request->boolean('replace_images')) {
+                foreach ($service->images as $image) {
+                    Storage::disk('public')->delete($image->path);
+                    $image->delete();
+                }
+            }
+
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('services', 'public');
+                $service->images()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('admin.services')->with('success', 'Service updated successfully');
+    }
+
+    public function destroyService(Service $service)
+    {
+        // Delete service images from storage
+        foreach ($service->images as $image) {
+            Storage::disk('public')->delete($image->path);
+        }
+
+        $service->delete();
+        return redirect()->route('admin.services')->with('success', 'Service deleted successfully');
     }
 }

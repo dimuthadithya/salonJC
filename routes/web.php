@@ -21,10 +21,18 @@ Route::middleware(['auth'])->group(function () {
     // Admin routes
     Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+
+        // Bookings routes
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
         Route::get('/bookings/{booking}', [AdminController::class, 'showBooking'])->name('admin.bookings.show');
+
+        // Services routes
         Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
+        Route::get('/services/create', [AdminController::class, 'createService'])->name('admin.services.create');
+        Route::post('/services', [AdminController::class, 'storeService'])->name('admin.services.store');
         Route::get('/services/{service}/edit', [AdminController::class, 'editService'])->name('admin.services.edit');
+        Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
+        Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
     });
 
     // Booking routes
