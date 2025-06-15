@@ -146,4 +146,30 @@ class AdminController extends Controller
         $service->delete();
         return redirect()->route('admin.services')->with('success', 'Service deleted successfully');
     }
+
+    public function bookings()
+    {
+        $bookings = Booking::with(['service', 'category'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin.bookings.index', compact('bookings'));
+    }
+
+    public function showBooking(Booking $booking)
+    {
+        $booking->load(['service', 'category']);
+        return view('admin.bookings.show', compact('booking'));
+    }
+
+    public function updateBookingStatus(Request $request, Booking $booking)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:pending,confirmed,cancelled',
+            'payment_status' => 'required|in:pending,paid,failed'
+        ]);
+
+        $booking->update($validated);
+        return redirect()->back()->with('success', 'Booking status updated successfully');
+    }
 }
