@@ -1,6 +1,46 @@
 <x-app-layout>
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+    <style>
+        .profile-image {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            background: #D4AF37;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #E6B800;
+            transform: scale(1.1);
+        }
+    </style>
+    @endpush
+
+    @push('scripts')
+    <!-- No JavaScript needed for profile photo upload -->
     @endpush
     @section('content')
     <!-- Dashboard Section -->
@@ -11,15 +51,30 @@
                 <div class="col-lg-3">
                     <div class="dashboard-sidebar">
                         <div class="user-profile text-center">
-                            <div class="profile-image">
-                                <img
-                                    src="{{ $user->profile_photo_url ?? asset('img/default-avatar.jpg') }}"
-                                    alt="Profile"
-                                    class="img-fluid rounded-circle" />
-                                <button class="upload-btn" title="Change Photo">
-                                    <i class="fas fa-camera"></i>
-                                </button>
+                            <form id="profile-photo-form" action="{{ route('profile.photo.update') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <div class="profile-image">
+                                    <img
+                                        src="{{ $user->profile_photo ? Storage::url($user->profile_photo) : asset('assets/img/default-avatar.jpg') }}"
+                                        alt="Profile"
+                                        class="img-fluid rounded-circle" />
+                                    <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*" onchange="this.form.submit()">
+                                    <button type="button" class="upload-btn" title="Change Photo" onclick="document.getElementById('profile_photo').click();">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @if(session('success'))
+                            <div class="alert alert-success mt-2">
+                                {{ session('success') }}
                             </div>
+                            @endif
+                            @if($errors->any())
+                            <div class="alert alert-danger mt-2">
+                                {{ $errors->first() }}
+                            </div>
+                            @endif
                             <h4 class="mt-3">{{ $user->name }}</h4>
                             <p class="member-since">Member since {{ $user->created_at->format('F Y') }}</p>
                         </div>

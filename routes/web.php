@@ -18,6 +18,7 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
 
     // Admin routes
     Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
