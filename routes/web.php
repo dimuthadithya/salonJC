@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
         // Bookings routes
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
         Route::get('/bookings/{booking}', [AdminController::class, 'showBooking'])->name('admin.bookings.show');
+        Route::put('/bookings/{booking}/status', [AdminController::class, 'updateBookingStatus'])->name('admin.bookings.update-status');
 
         // Services routes
         Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
