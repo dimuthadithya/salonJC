@@ -90,7 +90,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'features' => 'required|array',
+            'features' => 'nullable|array',
             'duration' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:service_categories,id',
@@ -118,7 +118,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'features' => 'required|array',
+            'features' => 'nullable|array',
             'duration' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:service_categories,id',

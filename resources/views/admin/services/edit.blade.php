@@ -132,12 +132,12 @@
                             <div class="features-container">
                                 @forelse($service->features ?? [] as $feature)
                                 <div class="input-group mb-2">
-                                    <input type="text" class="form-control" name="features[]" value="{{ $feature }}" required>
+                                    <input type="text" class="form-control" name="features[]" value="{{ $feature }}">
                                     <button type="button" class="btn btn-danger remove-feature">-</button>
                                 </div>
                                 @empty
                                 <div class="input-group mb-2">
-                                    <input type="text" class="form-control" name="features[]" required>
+                                    <input type="text" class="form-control" name="features[]">
                                     <button type="button" class="btn btn-success add-feature">+</button>
                                 </div>
                                 @endforelse
