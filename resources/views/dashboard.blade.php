@@ -132,7 +132,7 @@
                 <!-- Sidebar -->
                 <div class="col-lg-3">
                     <div class="dashboard-sidebar">
-                        <div class="user-profile text-center">
+                        <div class="text-center user-profile">
                             <form id="profile-photo-form" action="{{ route('profile.photo.update') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
@@ -148,12 +148,12 @@
                                 </div>
                             </form>
                             @if(session('success'))
-                            <div class="alert alert-success mt-2">
+                            <div class="mt-2 alert alert-success">
                                 {{ session('success') }}
                             </div>
                             @endif
                             @if($errors->any())
-                            <div class="alert alert-danger mt-2">
+                            <div class="mt-2 alert alert-danger">
                                 {{ $errors->first() }}
                             </div>
                             @endif
@@ -243,7 +243,7 @@
                             </div>
 
                             <!-- Upcoming Appointments -->
-                            <div class="section-card mt-4">
+                            <div class="mt-4 section-card">
                                 <div class="card-header">
                                     <h3>Upcoming Appointments</h3>
                                     <a
@@ -270,9 +270,9 @@
                                         </div>
                                     </div>
                                     @empty
-                                    <div class="text-center py-4">
+                                    <div class="py-4 text-center">
                                         <p>No upcoming appointments</p>
-                                        <a href="{{ route('services') }}" class="btn btn-primary mt-2">Book Now</a>
+                                        <a href="{{ route('services') }}" class="mt-2 btn btn-primary">Book Now</a>
                                     </div>
                                     @endforelse
                                 </div>
@@ -292,7 +292,7 @@
                             </div>
                             <div class="appointments-timeline">
                                 <!-- Upcoming Appointments -->
-                                <div class="timeline-section mb-4">
+                                <div class="mb-4 timeline-section">
                                     <h3>Upcoming Appointments</h3>
                                     @forelse($upcomingAppointments as $appointment)
                                     <div class="appointment-item">
@@ -307,18 +307,17 @@
                                             <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
                                         </div>
                                         <div class="appointment-actions">
-                                            @if($appointment->status === 'confirmed')
-                                            <button class="btn btn-reschedule">Reschedule</button>
-                                            @endif
                                             @if($appointment->status === 'pending')
-                                            <button class="btn btn-cancel">Cancel</button>
+                                            <button class="btn btn-cancel">
+                                                <i class="fas fa-times"></i> Cancel
+                                            </button>
                                             @endif
                                         </div>
                                     </div>
                                     @empty
-                                    <div class="text-center py-4">
+                                    <div class="py-4 text-center">
                                         <p>No upcoming appointments</p>
-                                        <a href="{{ route('services') }}" class="btn btn-primary mt-2">Book Now</a>
+                                        <a href="{{ route('services') }}" class="mt-2 btn btn-primary">Book Now</a>
                                     </div>
                                     @endforelse
                                 </div>
@@ -346,7 +345,7 @@
                                         </div>
                                     </div>
                                     @empty
-                                    <div class="text-center py-4">
+                                    <div class="py-4 text-center">
                                         <p>No past appointments</p>
                                     </div>
                                     @endforelse
@@ -414,7 +413,7 @@
                             </div>
 
                             <!-- Password Change Section -->
-                            <div class="section-card mt-4">
+                            <div class="mt-4 section-card">
                                 <h3>Change Password</h3>
                                 <form id="passwordForm" class="password-form">
                                     <div class="row g-3">
