@@ -58,6 +58,9 @@ class BookingController extends Controller
         ]);
 
         $service = Service::findOrFail($request->service);
+        $basePrice = $service->price;
+        $serviceFee = $basePrice * 0.03; // 3% service fee
+        $totalPrice = $basePrice + $serviceFee;
 
         $booking = Booking::create([
             'full_name' => $request->fullName,
@@ -69,15 +72,15 @@ class BookingController extends Controller
             'appointment_time' => $request->appointmentTime,
             'stylist_id' => null,
             'special_requirements' => $request->requirements,
-            'base_price' => $service->price,
-            'addons_price' => 0,
-            'total_price' => $service->price,
+            'base_price' => $basePrice,
+            'addons_price' => $serviceFee,
+            'total_price' => $totalPrice,
             'status' => 'pending',
             'payment_status' => 'pending'
         ]);
 
-        return redirect()->route('dashboard')
-            ->with('success', 'Your appointment has been booked successfully! We will confirm your booking shortly.');
+        // Redirect to payment page with booking ID
+        return redirect()->route('booking.payment', $booking->id);
     }
 
     private function getTimeSlots()
@@ -92,5 +95,54 @@ class BookingController extends Controller
         }
 
         return $slots;
+    }
+
+    public function showPayment($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // Only show payment page for pending payments
+        if ($booking->payment_status !== 'pending') {
+            return redirect()->route('dashboard')
+                ->with('error', 'This booking has already been paid for.');
+        }
+
+        return view('booking.payment', compact('booking'));
+    }
+
+    public function processPayment(Request $request, $id)
+    {
+        $request->validate([
+            'card_number' => 'required|string|size:16',
+            'card_expiry' => 'required|string|size:5', // MM/YY format
+            'card_cvv' => 'required|string|size:3',
+            'card_holder' => 'required|string|max:255',
+        ]);
+
+        $booking = Booking::findOrFail($id);
+
+        // Only process pending payments
+        if ($booking->payment_status !== 'pending') {
+            return redirect()->route('dashboard')
+                ->with('error', 'This booking has already been paid for.');
+        }
+
+        // In a real application, you would process the payment with a payment gateway here
+        // For this example, we'll simulate a successful payment
+        $booking->update([
+            'payment_status' => 'paid',
+            'payment_method' => 'credit_card',
+            'transaction_id' => 'TXN_' . uniqid(),
+            'status' => 'confirmed',
+            'confirmed_at' => now()
+        ]);
+
+        return redirect()->route('booking.payment.success', $booking->id);
+    }
+
+    public function paymentSuccess($id)
+    {
+        $booking = Booking::findOrFail($id);
+        return view('booking.success', compact('booking'));
     }
 }

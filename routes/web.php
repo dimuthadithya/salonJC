@@ -16,8 +16,15 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Booking routes
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
+    // Payment routes
+    Route::get('/booking/{id}/payment', [BookingController::class, 'showPayment'])->name('booking.payment');
+    Route::post('/booking/{id}/payment', [BookingController::class, 'processPayment'])->name('booking.payment.process');
+    Route::get('/booking/{id}/payment/success', [BookingController::class, 'paymentSuccess'])->name('booking.payment.success');
 });
 
 Route::middleware('auth')->group(function () {
