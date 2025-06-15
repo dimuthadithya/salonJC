@@ -69,6 +69,55 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
+
+        /* Stats cards styling */
+        .action-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 100%;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            background: #D4AF37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .action-icon i {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .action-card h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .action-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.9rem;
+        }
     </style>
     @endpush
 
@@ -170,6 +219,24 @@
                                             </div>
                                             <h4>{{ $pastAppointments->count() }}</h4>
                                             <p>Past Appointments</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <h4>{{ $pastAppointments->where('status', 'completed')->count() }}</h4>
+                                            <p>Completed Sessions</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon">
+                                                <i class="fas fa-coins"></i>
+                                            </div>
+                                            <h4>{{ number_format($pastAppointments->sum('total_price'), 2) }} LKR</h4>
+                                            <p>Total Spent</p>
                                         </div>
                                     </div>
                                 </div>
