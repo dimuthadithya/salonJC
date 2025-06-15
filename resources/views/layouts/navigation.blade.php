@@ -47,7 +47,7 @@
                   </li>
                   @endauth
                   <li class="nav-item ms-lg-2">
-                      <a href="{{ route('booking') }}" class="nav-link book-now-nav">Book Now</a>
+                      <a href="{{ route('services') }}" class="nav-link book-now-nav">Book Now</a>
                   </li>
               </ul>
           </div>

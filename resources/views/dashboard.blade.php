@@ -195,7 +195,7 @@
                         <div class="tab-pane fade show active" id="overview">
                             <div class="dashboard-header">
                                 <h2>My Dashboard</h2>
-                                <a href="booking.html" class="btn btn-book-appointment">
+                                <a href="{{ route('services') }}" class="btn btn-book-appointment">
                                     <i class="fas fa-plus"></i> Book New Appointment
                                 </a>
                             </div>
@@ -272,7 +272,7 @@
                                     @empty
                                     <div class="text-center py-4">
                                         <p>No upcoming appointments</p>
-                                        <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
+                                        <a href="{{ route('services') }}" class="btn btn-primary mt-2">Book Now</a>
                                     </div>
                                     @endforelse
                                 </div>
@@ -318,7 +318,7 @@
                                     @empty
                                     <div class="text-center py-4">
                                         <p>No upcoming appointments</p>
-                                        <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
+                                        <a href="{{ route('services') }}" class="btn btn-primary mt-2">Book Now</a>
                                     </div>
                                     @endforelse
                                 </div>
