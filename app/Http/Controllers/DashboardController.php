@@ -32,10 +32,29 @@ class DashboardController extends Controller
             ->with(['service', 'category'])
             ->get();
 
+        // Calculate total spent amount (only from completed and paid appointments)
+        $totalSpent = Booking::where('email', $user->email)
+            ->where('status', 'completed')
+            ->where('payment_status', 'paid')
+            ->sum('total_price');
+
+        // Get completed sessions count
+        $completedSessions = Booking::where('email', $user->email)
+            ->where('status', 'completed')
+            ->count();
+
+        // Get cancelled appointments count
+        $cancelledAppointments = Booking::where('email', $user->email)
+            ->where('status', 'cancelled')
+            ->count();
+
         return view('dashboard', compact(
             'user',
             'upcomingAppointments',
-            'pastAppointments'
+            'pastAppointments',
+            'totalSpent',
+            'completedSessions',
+            'cancelledAppointments'
         ));
     }
 }

@@ -215,6 +215,33 @@
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
                                             <div class="action-icon">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <h4>{{ $completedSessions }}</h4>
+                                            <p>Completed Sessions</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon">
+                                                <i class="fas fa-money-bill-wave"></i>
+                                            </div>
+                                            <h4>{{ number_format($totalSpent, 2) }} LKR</h4>
+                                            <p>Total Spent</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon" style="background: #ffcccc; color: #ff4444;">
+                                                <i class="fas fa-times-circle"></i>
+                                            </div>
+                                            <h4>{{ $cancelledAppointments }}</h4>
+                                            <p>Cancelled Appointments</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon">
                                                 <i class="fas fa-history"></i>
                                             </div>
                                             <h4>{{ $pastAppointments->count() }}</h4>
