@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         // Get upcoming appointments
-        $upcomingAppointments = Booking::where('email', $user->email)
+        $upcomingAppointments = Booking::where('user_id', $user->id)
             ->whereIn('status', ['pending', 'confirmed'])
             ->where('appointment_date', '>=', now()->format('Y-m-d'))
             ->orderBy('appointment_date')
@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->get();
 
         // Get past appointments
-        $pastAppointments = Booking::where('email', $user->email)
+        $pastAppointments = Booking::where('user_id', $user->id)
             ->where(function ($query) {
                 $query->where('appointment_date', '<', now()->format('Y-m-d'))
                     ->orWhere('status', 'completed');
@@ -33,18 +33,18 @@ class DashboardController extends Controller
             ->get();
 
         // Calculate total spent amount (only from completed and paid appointments)
-        $totalSpent = Booking::where('email', $user->email)
+        $totalSpent = Booking::where('user_id', $user->id)
             ->where('status', 'completed')
             ->where('payment_status', 'paid')
             ->sum('total_price');
 
         // Get completed sessions count
-        $completedSessions = Booking::where('email', $user->email)
+        $completedSessions = Booking::where('user_id', $user->id)
             ->where('status', 'completed')
             ->count();
 
         // Get cancelled appointments count
-        $cancelledAppointments = Booking::where('email', $user->email)
+        $cancelledAppointments = Booking::where('user_id', $user->id)
             ->where('status', 'cancelled')
             ->count();
 

@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\Specialist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -57,12 +58,16 @@ class BookingController extends Controller
             'termsAccept' => 'required|accepted'
         ]);
 
+        // Get authenticated user
+        $user = Auth::user();
+
         $service = Service::findOrFail($request->service);
         $basePrice = $service->price;
         $serviceFee = $basePrice * 0.03; // 3% service fee
         $totalPrice = $basePrice + $serviceFee;
 
         $booking = Booking::create([
+            'user_id' => $user ? $user->id : null,
             'full_name' => $request->fullName,
             'phone' => $request->phone,
             'email' => $request->email,
