@@ -8,6 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }} - Admin</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon_io/favicon.ico') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,6 +148,12 @@
                 <a href="{{ route('admin.categories') }}" class="nav-link {{ request()->routeIs('admin.categories*') ? 'active' : '' }}">
                     <i class="fas fa-th-list"></i>
                     Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('home') }}" class="nav-link" target="_blank">
+                    <i class="fas fa-globe"></i>
+                    Visit Website
                 </a>
             </li>
             <li class="nav-item mt-4">

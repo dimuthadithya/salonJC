@@ -48,4 +48,9 @@ class Service extends Model
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ServiceImage::class);
+    }
 }
