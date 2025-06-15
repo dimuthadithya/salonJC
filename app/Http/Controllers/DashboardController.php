@@ -2,12 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $user = Auth::user();
+
+        // Get upcoming appointments
+        $upcomingAppointments = Booking::where('email', $user->email)
+            ->whereIn('status', ['pending', 'confirmed'])
+            ->where('appointment_date', '>=', now()->format('Y-m-d'))
+            ->orderBy('appointment_date')
+            ->orderBy('appointment_time')
+            ->with(['service', 'category'])
+            ->get();
+
+        // Get past appointments
+        $pastAppointments = Booking::where('email', $user->email)
+            ->where(function ($query) {
+                $query->where('appointment_date', '<', now()->format('Y-m-d'))
+                    ->orWhere('status', 'completed');
+            })
+            ->orderBy('appointment_date', 'desc')
+            ->orderBy('appointment_time', 'desc')
+            ->with(['service', 'category'])
+            ->get();
+
+        return view('dashboard', compact(
+            'user',
+            'upcomingAppointments',
+            'pastAppointments'
+        ));
     }
 }

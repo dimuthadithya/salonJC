@@ -13,15 +13,15 @@
                         <div class="user-profile text-center">
                             <div class="profile-image">
                                 <img
-                                    src="img/testimonials/client-1.jpg"
+                                    src="{{ $user->profile_photo_url ?? asset('img/default-avatar.jpg') }}"
                                     alt="Profile"
                                     class="img-fluid rounded-circle" />
                                 <button class="upload-btn" title="Change Photo">
                                     <i class="fas fa-camera"></i>
                                 </button>
                             </div>
-                            <h4 class="mt-3">Sarah Johnson</h4>
-                            <p class="member-since">Member since June 2025</p>
+                            <h4 class="mt-3">{{ $user->name }}</h4>
+                            <p class="member-since">Member since {{ $user->created_at->format('F Y') }}</p>
                         </div>
                         <nav class="dashboard-nav">
                             <ul class="nav flex-column">
@@ -44,14 +44,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#profile" data-bs-toggle="tab">
                                         <i class="fas fa-user-edit"></i> Profile Settings
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link"
-                                        href="#preferences"
-                                        data-bs-toggle="tab">
-                                        <i class="fas fa-sliders-h"></i> Preferences
                                     </a>
                                 </li>
                             </ul>
@@ -79,7 +71,7 @@
                                             <div class="action-icon">
                                                 <i class="fas fa-calendar-check"></i>
                                             </div>
-                                            <h4>2</h4>
+                                            <h4>{{ $upcomingAppointments->count() }}</h4>
                                             <p>Upcoming Appointments</p>
                                         </div>
                                     </div>
@@ -88,26 +80,8 @@
                                             <div class="action-icon">
                                                 <i class="fas fa-history"></i>
                                             </div>
-                                            <h4>8</h4>
+                                            <h4>{{ $pastAppointments->count() }}</h4>
                                             <p>Past Appointments</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="action-card">
-                                            <div class="action-icon">
-                                                <i class="fas fa-tag"></i>
-                                            </div>
-                                            <h4>3</h4>
-                                            <p>Active Offers</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="action-card">
-                                            <div class="action-icon">
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h4>250</h4>
-                                            <p>Loyalty Points</p>
                                         </div>
                                     </div>
                                 </div>
@@ -123,21 +97,29 @@
                                         data-bs-toggle="tab">View All</a>
                                 </div>
                                 <div class="appointment-list">
+                                    @forelse($upcomingAppointments as $appointment)
                                     <div class="appointment-item">
                                         <div class="appointment-date">
-                                            <span class="date">15</span>
-                                            <span class="month">Jun</span>
+                                            <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
+                                            <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
                                         </div>
                                         <div class="appointment-info">
-                                            <h4>Hair Styling & Makeup</h4>
-                                            <p><i class="fas fa-clock"></i> 10:00 AM - 11:30 AM</p>
-                                            <p><i class="fas fa-user"></i> with Jessica Chen</p>
+                                            <h4>{{ $appointment->service->name }}</h4>
+                                            <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
+                                            <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
                                         </div>
                                         <div class="appointment-actions">
-                                            <button class="btn btn-reschedule">Reschedule</button>
-                                            <button class="btn btn-cancel">Cancel</button>
+                                            <button class="btn btn-{{ $appointment->status === 'confirmed' ? 'reschedule' : 'cancel' }}">
+                                                {{ $appointment->status === 'confirmed' ? 'Reschedule' : 'Cancel' }}
+                                            </button>
                                         </div>
                                     </div>
+                                    @empty
+                                    <div class="text-center py-4">
+                                        <p>No upcoming appointments</p>
+                                        <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
+                                    </div>
+                                    @endforelse
                                     <div class="appointment-item">
                                         <div class="appointment-date">
                                             <span class="date">22</span>
@@ -152,25 +134,6 @@
                                             <button class="btn btn-reschedule">Reschedule</button>
                                             <button class="btn btn-cancel">Cancel</button>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Special Offers -->
-                            <div class="section-card mt-4">
-                                <div class="card-header">
-                                    <h3>Special Offers</h3>
-                                </div>
-                                <div class="offers-list">
-                                    <div class="offer-item">
-                                        <div class="offer-icon">
-                                            <i class="fas fa-gift"></i>
-                                        </div>
-                                        <div class="offer-info">
-                                            <h4>20% Off on Hair Treatments</h4>
-                                            <p>Valid until June 30, 2025</p>
-                                        </div>
-                                        <button class="btn btn-use-offer">Use Offer</button>
                                     </div>
                                 </div>
                             </div>
@@ -227,12 +190,13 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="firstName">First Name</label>
+                                                <label for="firstName">Name</label>
                                                 <input
                                                     type="text"
                                                     class="form-control"
                                                     id="firstName"
-                                                    value="Sarah" />
+                                                    value="{{ $user->name }}"
+                                                    disabled />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -252,7 +216,8 @@
                                                     type="email"
                                                     class="form-control"
                                                     id="email"
-                                                    value="sarah@example.com" />
+                                                    value="{{ $user->email }}"
+                                                    disabled />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -313,105 +278,6 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-
-                        <!-- Preferences Tab -->
-                        <div class="tab-pane fade" id="preferences">
-                            <div class="dashboard-header">
-                                <h2>My Preferences</h2>
-                            </div>
-                            <div class="row g-4">
-                                <!-- Preferred Services -->
-                                <div class="col-md-6">
-                                    <div class="section-card">
-                                        <h3>Preferred Services</h3>
-                                        <div class="preferences-list">
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="service1" checked />
-                                                <label for="service1">Hair Styling</label>
-                                            </div>
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="service2" checked />
-                                                <label for="service2">Makeup</label>
-                                            </div>
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="service3" />
-                                                <label for="service3">Facial Treatments</label>
-                                            </div>
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="service4" checked />
-                                                <label for="service4">Hair Coloring</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Favorite Stylists -->
-                                <div class="col-md-6">
-                                    <div class="section-card">
-                                        <h3>Favorite Stylists</h3>
-                                        <div class="stylist-list">
-                                            <div class="stylist-item">
-                                                <img src="img/team/stylist-1.jpg" alt="Stylist" />
-                                                <div class="stylist-info">
-                                                    <h4>Jessica Chen</h4>
-                                                    <p>Master Stylist</p>
-                                                </div>
-                                                <button class="btn btn-favorite active">
-                                                    <i class="fas fa-heart"></i>
-                                                </button>
-                                            </div>
-                                            <div class="stylist-item">
-                                                <img src="img/team/stylist-2.jpg" alt="Stylist" />
-                                                <div class="stylist-info">
-                                                    <h4>Maria Garcia</h4>
-                                                    <p>Makeup Artist</p>
-                                                </div>
-                                                <button class="btn btn-favorite">
-                                                    <i class="far fa-heart"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Communication Preferences -->
-                                <div class="col-md-6">
-                                    <div class="section-card">
-                                        <h3>Communication Preferences</h3>
-                                        <div class="preferences-list">
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="emailNotif" checked />
-                                                <label for="emailNotif">Email Notifications</label>
-                                            </div>
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="smsNotif" checked />
-                                                <label for="smsNotif">SMS Notifications</label>
-                                            </div>
-                                            <div class="preference-item">
-                                                <input type="checkbox" id="promoNotif" />
-                                                <label for="promoNotif">Promotional Updates</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Special Requirements -->
-                                <div class="col-md-6">
-                                    <div class="section-card">
-                                        <h3>Special Requirements</h3>
-                                        <div class="form-group">
-                                            <textarea
-                                                class="form-control"
-                                                rows="4"
-                                                placeholder="Add any special requirements or notes here..."></textarea>
-                                        </div>
-                                        <button class="btn btn-save mt-3">
-                                            Save Requirements
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
