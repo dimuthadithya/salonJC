@@ -1,6 +1,128 @@
 <x-app-layout>
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+    <style>
+        .profile-image {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            background: #D4AF37;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #E6B800;
+            transform: scale(1.1);
+        }
+
+        /* Dark theme input styles */
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+            color: #fff;
+        }
+
+        .form-control:disabled {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group label {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Stats cards styling */
+        .action-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 100%;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            background: #D4AF37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .action-icon i {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .action-card h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .action-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+    @endpush
+
+    @push('scripts')
+    <!-- No JavaScript needed for profile photo upload -->
     @endpush
     @section('content')
     <!-- Dashboard Section -->
@@ -10,16 +132,31 @@
                 <!-- Sidebar -->
                 <div class="col-lg-3">
                     <div class="dashboard-sidebar">
-                        <div class="user-profile text-center">
-                            <div class="profile-image">
-                                <img
-                                    src="{{ $user->profile_photo_url ?? asset('img/default-avatar.jpg') }}"
-                                    alt="Profile"
-                                    class="img-fluid rounded-circle" />
-                                <button class="upload-btn" title="Change Photo">
-                                    <i class="fas fa-camera"></i>
-                                </button>
+                        <div class="text-center user-profile">
+                            <form id="profile-photo-form" action="{{ route('profile.photo.update') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <div class="profile-image">
+                                    <img
+                                        src="{{ $user->profile_photo ? Storage::url($user->profile_photo) : asset('assets/img/default-avatar.jpg') }}"
+                                        alt="Profile"
+                                        class="img-fluid rounded-circle" />
+                                    <input type="file" name="profile_photo" id="profile_photo" class="d-none" accept="image/*" onchange="this.form.submit()">
+                                    <button type="button" class="upload-btn" title="Change Photo" onclick="document.getElementById('profile_photo').click();">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @if(session('success'))
+                            <div class="mt-2 alert alert-success">
+                                {{ session('success') }}
                             </div>
+                            @endif
+                            @if($errors->any())
+                            <div class="mt-2 alert alert-danger">
+                                {{ $errors->first() }}
+                            </div>
+                            @endif
                             <h4 class="mt-3">{{ $user->name }}</h4>
                             <p class="member-since">Member since {{ $user->created_at->format('F Y') }}</p>
                         </div>
@@ -58,7 +195,7 @@
                         <div class="tab-pane fade show active" id="overview">
                             <div class="dashboard-header">
                                 <h2>My Dashboard</h2>
-                                <a href="booking.html" class="btn btn-book-appointment">
+                                <a href="{{ route('services') }}" class="btn btn-book-appointment">
                                     <i class="fas fa-plus"></i> Book New Appointment
                                 </a>
                             </div>
@@ -68,7 +205,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #2196F3;">
                                                 <i class="fas fa-calendar-check"></i>
                                             </div>
                                             <h4>{{ $upcomingAppointments->count() }}</h4>
@@ -77,18 +214,36 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #9C27B0;">
                                                 <i class="fas fa-history"></i>
                                             </div>
                                             <h4>{{ $pastAppointments->count() }}</h4>
                                             <p>Past Appointments</p>
                                         </div>
                                     </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon" style="background: #4CAF50;">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <h4>{{ $completedSessions }}</h4>
+                                            <p>Completed Sessions</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="action-card">
+                                            <div class="action-icon" style="background: #FF9800;">
+                                                <i class="fas fa-coins"></i>
+                                            </div>
+                                            <h4>{{ number_format($totalSpent, 2) }} LKR</h4>
+                                            <p>Total Spent</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Upcoming Appointments -->
-                            <div class="section-card mt-4">
+                            <div class="mt-4 section-card">
                                 <div class="card-header">
                                     <h3>Upcoming Appointments</h3>
                                     <a
@@ -115,26 +270,11 @@
                                         </div>
                                     </div>
                                     @empty
-                                    <div class="text-center py-4">
+                                    <div class="py-4 text-center">
                                         <p>No upcoming appointments</p>
-                                        <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
+                                        <a href="{{ route('services') }}" class="mt-2 btn btn-primary">Book Now</a>
                                     </div>
                                     @endforelse
-                                    <div class="appointment-item">
-                                        <div class="appointment-date">
-                                            <span class="date">22</span>
-                                            <span class="month">Jun</span>
-                                        </div>
-                                        <div class="appointment-info">
-                                            <h4>Facial Treatment</h4>
-                                            <p><i class="fas fa-clock"></i> 2:00 PM - 3:00 PM</p>
-                                            <p><i class="fas fa-user"></i> with Maria Garcia</p>
-                                        </div>
-                                        <div class="appointment-actions">
-                                            <button class="btn btn-reschedule">Reschedule</button>
-                                            <button class="btn btn-cancel">Cancel</button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -152,30 +292,63 @@
                             </div>
                             <div class="appointments-timeline">
                                 <!-- Upcoming Appointments -->
-                                <div class="timeline-section">
+                                <div class="mb-4 timeline-section">
                                     <h3>Upcoming Appointments</h3>
-                                    <!-- Same appointment items as in overview -->
+                                    @forelse($upcomingAppointments as $appointment)
+                                    <div class="appointment-item">
+                                        <div class="appointment-date">
+                                            <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
+                                            <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
+                                        </div>
+                                        <div class="appointment-info">
+                                            <h4>{{ $appointment->service->name }}</h4>
+                                            <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
+                                            <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
+                                            <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
+                                        </div>
+                                        <div class="appointment-actions">
+                                            @if($appointment->status === 'pending')
+                                            <button class="btn btn-cancel">
+                                                <i class="fas fa-times"></i> Cancel
+                                            </button>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <div class="py-4 text-center">
+                                        <p>No upcoming appointments</p>
+                                        <a href="{{ route('services') }}" class="mt-2 btn btn-primary">Book Now</a>
+                                    </div>
+                                    @endforelse
                                 </div>
 
                                 <!-- Past Appointments -->
                                 <div class="timeline-section">
                                     <h3>Past Appointments</h3>
-                                    <div class="appointment-item completed">
+                                    @forelse($pastAppointments as $appointment)
+                                    <div class="appointment-item {{ $appointment->status }}">
                                         <div class="appointment-date">
-                                            <span class="date">01</span>
-                                            <span class="month">Jun</span>
+                                            <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
+                                            <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
                                         </div>
                                         <div class="appointment-info">
-                                            <h4>Hair Coloring</h4>
-                                            <p><i class="fas fa-clock"></i> 11:00 AM - 1:00 PM</p>
-                                            <p><i class="fas fa-user"></i> with Emily Taylor</p>
-                                            <span class="status completed">Completed</span>
+                                            <h4>{{ $appointment->service->name }}</h4>
+                                            <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
+                                            <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
+                                            <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
                                         </div>
                                         <div class="appointment-actions">
+                                            @if($appointment->status === 'completed')
                                             <button class="btn btn-review">Write Review</button>
                                             <button class="btn btn-rebook">Book Again</button>
+                                            @endif
                                         </div>
                                     </div>
+                                    @empty
+                                    <div class="py-4 text-center">
+                                        <p>No past appointments</p>
+                                    </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -240,7 +413,7 @@
                             </div>
 
                             <!-- Password Change Section -->
-                            <div class="section-card mt-4">
+                            <div class="mt-4 section-card">
                                 <h3>Change Password</h3>
                                 <form id="passwordForm" class="password-form">
                                     <div class="row g-3">

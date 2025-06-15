@@ -29,9 +29,16 @@
                   </li>
                   @endguest
                   @auth
+                  <!-- Show admin dashboard link for admin users -->
+                  @if(Auth::user()->role === 'admin')
+                  <li class="nav-item">
+                      <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Admin Dashboard</a>
+                  </li>
+                  @else
                   <li class="nav-item">
                       <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
                   </li>
+                  @endif
                   <li class="nav-item">
                       <form action="{{ route('logout') }}" method="post">
                           @csrf
@@ -40,7 +47,7 @@
                   </li>
                   @endauth
                   <li class="nav-item ms-lg-2">
-                      <a href="{{ route('booking') }}" class="nav-link book-now-nav">Book Now</a>
+                      <a href="{{ route('services') }}" class="nav-link book-now-nav">Book Now</a>
                   </li>
               </ul>
           </div>

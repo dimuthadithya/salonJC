@@ -23,7 +23,8 @@ class Booking extends Model
         'payment_status',
         'payment_method',
         'transaction_id',
-        'confirmed_at'
+        'confirmed_at',
+        'user_id' // Add user_id to fillable
     ];
 
     public function service()
@@ -34,5 +35,10 @@ class Booking extends Model
     public function category()
     {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
