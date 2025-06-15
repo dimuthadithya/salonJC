@@ -175,21 +175,6 @@
                                         <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
                                     </div>
                                     @endforelse
-                                    <div class="appointment-item">
-                                        <div class="appointment-date">
-                                            <span class="date">22</span>
-                                            <span class="month">Jun</span>
-                                        </div>
-                                        <div class="appointment-info">
-                                            <h4>Facial Treatment</h4>
-                                            <p><i class="fas fa-clock"></i> 2:00 PM - 3:00 PM</p>
-                                            <p><i class="fas fa-user"></i> with Maria Garcia</p>
-                                        </div>
-                                        <div class="appointment-actions">
-                                            <button class="btn btn-reschedule">Reschedule</button>
-                                            <button class="btn btn-cancel">Cancel</button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -207,30 +192,64 @@
                             </div>
                             <div class="appointments-timeline">
                                 <!-- Upcoming Appointments -->
-                                <div class="timeline-section">
+                                <div class="timeline-section mb-4">
                                     <h3>Upcoming Appointments</h3>
-                                    <!-- Same appointment items as in overview -->
+                                    @forelse($upcomingAppointments as $appointment)
+                                    <div class="appointment-item">
+                                        <div class="appointment-date">
+                                            <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
+                                            <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
+                                        </div>
+                                        <div class="appointment-info">
+                                            <h4>{{ $appointment->service->name }}</h4>
+                                            <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
+                                            <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
+                                            <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
+                                        </div>
+                                        <div class="appointment-actions">
+                                            @if($appointment->status === 'confirmed')
+                                            <button class="btn btn-reschedule">Reschedule</button>
+                                            @endif
+                                            @if($appointment->status === 'pending')
+                                            <button class="btn btn-cancel">Cancel</button>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <div class="text-center py-4">
+                                        <p>No upcoming appointments</p>
+                                        <a href="{{ route('booking') }}" class="btn btn-primary mt-2">Book Now</a>
+                                    </div>
+                                    @endforelse
                                 </div>
 
                                 <!-- Past Appointments -->
                                 <div class="timeline-section">
                                     <h3>Past Appointments</h3>
-                                    <div class="appointment-item completed">
+                                    @forelse($pastAppointments as $appointment)
+                                    <div class="appointment-item {{ $appointment->status }}">
                                         <div class="appointment-date">
-                                            <span class="date">01</span>
-                                            <span class="month">Jun</span>
+                                            <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
+                                            <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
                                         </div>
                                         <div class="appointment-info">
-                                            <h4>Hair Coloring</h4>
-                                            <p><i class="fas fa-clock"></i> 11:00 AM - 1:00 PM</p>
-                                            <p><i class="fas fa-user"></i> with Emily Taylor</p>
-                                            <span class="status completed">Completed</span>
+                                            <h4>{{ $appointment->service->name }}</h4>
+                                            <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
+                                            <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
+                                            <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
                                         </div>
                                         <div class="appointment-actions">
+                                            @if($appointment->status === 'completed')
                                             <button class="btn btn-review">Write Review</button>
                                             <button class="btn btn-rebook">Book Again</button>
+                                            @endif
                                         </div>
                                     </div>
+                                    @empty
+                                    <div class="text-center py-4">
+                                        <p>No past appointments</p>
+                                    </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
