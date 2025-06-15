@@ -25,13 +25,41 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            border: 1px solid transparent;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background-color: #28A745;
+            color: white;
+            border-color: #1e7e34;
+        }
+
+        .alert-danger {
+            background-color: #DC3545;
+            color: white;
+            border-color: #bd2130;
+        }
+
+        .btn-link {
+            color: #D4AF37;
+        }
+
+        .btn-link:hover {
+            color: #E6B800;
+        }
+
+        /* Sidebar Styles */
         .sidenav {
             width: 250px;
             position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
-            background: #2c3e50;
+            background: #2C2C2C;
             transition: 0.3s;
             z-index: 1000;
         }
@@ -63,14 +91,14 @@
         }
 
         .nav-link:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
+            color: #D4AF37;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .nav-link.active {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid #3498db;
+            color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #D4AF37;
         }
 
         .nav-link i {
@@ -82,7 +110,7 @@
             margin-left: 250px;
             padding: 20px;
             min-height: 100vh;
-            background: #f8f9fa;
+            background: #F8F6F0;
             transition: 0.3s;
         }
 
@@ -94,6 +122,7 @@
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            border-radius: 8px;
         }
 
         @media (max-width: 768px) {
@@ -120,9 +149,8 @@
 <body>
     <nav class="sidenav">
         <div class="sidenav-header">
-            <a href="{{ route('admin.dashboard') }}" class="sidenav-brand">
-                <i class="fas fa-spa me-2"></i>
-                SalonJC Admin
+            <a href="{{ route('admin.dashboard') }}" class="sidenav-brand"> <i class="fas fa-spa me-2" style="color: #D4AF37;"></i>
+                <span style="color: #D4AF37;">SalonJC</span> Admin
             </a>
         </div>
         <ul class="nav flex-column mt-4">
