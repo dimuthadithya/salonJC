@@ -13,19 +13,29 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $categories = ServiceCategory::all();
-        $services = Service::with('category')->get();
-        $stylists = Specialist::all();
-        $timeSlots = $this->getTimeSlots();
-
-        // If service parameter exists in URL, get the service and its category
-        $selectedService = null;
         $selectedCategory = null;
+        $selectedService = null;
+        $services = collect();
+
+        // If category is selected, get its services
+        if ($request->has('serviceCategory')) {
+            $selectedCategory = ServiceCategory::find($request->serviceCategory);
+            if ($selectedCategory) {
+                $services = Service::where('category_id', $selectedCategory->id)->get();
+            }
+        }
+
+        // If service is specified in URL
         if ($request->has('service')) {
             $selectedService = Service::find($request->service);
             if ($selectedService) {
                 $selectedCategory = $selectedService->category;
+                $services = Service::where('category_id', $selectedCategory->id)->get();
             }
         }
+
+        $stylists = Specialist::all();
+        $timeSlots = $this->getTimeSlots();
 
         return view('booking', compact(
             'categories',

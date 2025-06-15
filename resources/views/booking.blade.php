@@ -1,8 +1,6 @@
 <x-app-layout>
     @push('styles')
-    <link rel="stylesheet" href="{{ asset('as                                        <select class="form-control" id="service" name="service" required disabled>
-                                            <option value="">Select a service</option>
-                                        </select>oking.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}">
     @endpush
 
     @section('content')
@@ -61,11 +59,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="serviceCategory">Service Category *</label>
-                                        <select class="form-control" id="serviceCategory" name="serviceCategory" required>
+                                        <select class="form-control" id="serviceCategory" name="serviceCategory" required onchange="this.form.submit()">
                                             <option value="">Select a category</option>
                                             @foreach($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ old('serviceCategory') == $category->id ? 'selected' : 
+                                                {{ request('serviceCategory') == $category->id ? 'selected' : 
                                                    ($selectedCategory && $selectedCategory->id == $category->id ? 'selected' : '') }}>
                                                 {{ $category->name }}
                                             </option>
@@ -80,14 +78,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="service">Service *</label>
-                                        <select class="form-control" id="service" name="service" required>
+                                        <select class="form-control" id="service" name="service" required {{ count($services) ? '' : 'disabled' }}>
                                             <option value="">Select a service</option>
                                             @foreach($services as $service)
                                             <option value="{{ $service->id }}"
-                                                data-price="{{ $service->price }}"
-                                                {{ old('service') == $service->id ? 'selected' : 
-                                                   ($selectedService && $selectedService->id == $service->id ? 'selected' : '') }}>
-                                                {{ $service->name }} - Rs. {{ number_format($service->price, 2) }}
+                                                {{ request('service') == $service->id ? 'selected' : 
+                                                   ($selectedService && $selectedService->id == $service->id ? 'selected' : '') }}
+                                                data-price="{{ $service->price }}">
+                                                {{ $service->name }} - {{ number_format($service->price, 2) }} LKR
                                             </option>
                                             @endforeach
                                         </select>
@@ -189,57 +187,84 @@
         </div>
     </div>
     @endsection
-
     @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const categorySelect = document.getElementById('serviceCategory');
-            const serviceSelect = document.getElementById('service');
-            const services = @json($services);
+        $(document).ready(function() {
+            // Cache DOM elements
+            const form = {
+                date: $('#appointmentDate'),
+                time: $('#appointmentTime'),
+                category: $('#serviceCategory')
+            };
 
-            // Function to filter and update services dropdown
-            function updateServices(categoryId) {
-                // Clear current options except the first one
-                serviceSelect.innerHTML = '<option value="">Select a service</option>';
+            // Date handling functions
+            function validateDateTime() {
+                const selectedDate = form.date.val();
+                const selectedTime = form.time.val();
 
-                if (!categoryId) return;
+                if (selectedDate && selectedTime) {
+                    const now = new Date();
+                    const selected = new Date(selectedDate + ' ' + selectedTime);
 
-                // Filter and add services for selected category
-                services.filter(service => service.category_id == categoryId)
-                    .forEach(service => {
-                        const option = new Option(
-                            `${service.name} - Rs. ${parseFloat(service.price).toFixed(2)}`,
-                            service.id
-                        );
-                        option.dataset.price = service.price;
-                        serviceSelect.add(option);
-                    });
-
-                // If there was a pre-selected service and it belongs to this category, select it
-                @if(isset($selectedService))
-                if ({
-                        {
-                            $selectedService - > category_id
-                        }
-                    } == categoryId) {
-                    serviceSelect.value = {
-                        {
-                            $selectedService - > id
-                        }
-                    };
+                    // Disable booking for past times
+                    if (selected < now) {
+                        alert('Please select a future date and time.');
+                        form.time.val('');
+                    }
                 }
-                @endif
             }
 
-            // Initialize services dropdown based on initial category selection
-            if (categorySelect.value) {
-                updateServices(categorySelect.value);
-            }
+            form.time.on('change', validateDateTime);
 
-            // Update services when category changes
-            categorySelect.addEventListener('change', function() {
-                updateServices(this.value);
-                serviceSelect.disabled = !this.value;
+            // Handle category change to preserve other form fields
+            form.category.on('change', function() {
+                // Store all form values except category
+                const formData = $('form.booking-form').serializeArray()
+                    .filter(item => item.name !== 'serviceCategory' && item.name !== '_token');
+
+                // Add hidden fields to preserve data during category change submission
+                formData.forEach(function(item) {
+                    if (item.value) {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: item.name,
+                            value: item.value
+                        }).appendTo('form.booking-form');
+                    }
+                });
+            });
+
+            // Form validation on final submit
+            $('form.booking-form').on('submit', function(e) {
+                // Don't validate if it's just changing category
+                if (e.originalEvent && $(e.originalEvent.submitter).attr('id') === 'serviceCategory') {
+                    return true;
+                }
+
+                const required = ['fullName', 'phone', 'email', 'serviceCategory', 'service', 'appointmentDate', 'appointmentTime'];
+                let isValid = true;
+
+                required.forEach(fieldId => {
+                    const field = $(`#${fieldId}`);
+                    const value = field.val();
+
+                    if (!value || value.trim() === '') {
+                        isValid = false;
+                        field.addClass('is-invalid');
+                    } else {
+                        field.removeClass('is-invalid');
+                    }
+                });
+
+                if (!$('#termsAccept').is(':checked')) {
+                    isValid = false;
+                    $('#termsAccept').addClass('is-invalid');
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Please fill in all required fields and accept the terms and conditions.');
+                }
             });
         });
     </script>
