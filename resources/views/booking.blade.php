@@ -1,7 +1,10 @@
 <x-app-layout>
     @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/booking.css') }}">
+    <link rel="stylesheet" href="{{ asset('as                                        <select class="form-control" id="service" name="service" required disabled>
+                                            <option value="">Select a service</option>
+                                        </select>oking.css') }}">
     @endpush
+
     @section('content')
     <main>
         <!-- Page Header -->
@@ -19,262 +22,146 @@
         <!-- Booking Form Section -->
         <section class="booking-section">
             <div class="container">
-                <div class="booking-progress mb-5">
-                    <div class="progress-step active" data-step="1">
-                        <div class="step-icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <span>Personal Info</span>
-                    </div>
-                    <div class="progress-step" data-step="2">
-                        <div class="step-icon">
-                            <i class="fas fa-cut"></i>
-                        </div>
-                        <span>Select Service</span>
-                    </div>
-                    <div class="progress-step" data-step="3">
-                        <div class="step-icon">
-                            <i class="fas fa-calendar"></i>
-                        </div>
-                        <span>Schedule</span>
-                    </div>
-                    <div class="progress-step" data-step="4">
-                        <div class="step-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <span>Payment</span>
-                    </div>
-                </div>
-
-                <form id="bookingForm" class="booking-form">
-                    <!-- Step 1: Personal Information -->
-                    <div class="form-step active" id="step1">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name *</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="fullName"
-                                        required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="phone">Phone Number *</label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        id="phone"
-                                        required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Email Address *</label>
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        id="email"
-                                        required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="age">Age</label>
-                                    <input type="number" class="form-control" id="age" />
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="requirements">Special Requirements or Allergies</label>
-                                    <textarea
-                                        class="form-control"
-                                        id="requirements"
-                                        rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Service Selection -->
-                    <div class="form-step" id="step2">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="serviceCategory">Service Category *</label>
-                                    <select class="form-control" id="serviceCategory" required>
-                                        <option value="">Select a category</option>
-                                        <option value="bridal">Bridal Services</option>
-                                        <option value="hair">Hair Services</option>
-                                        <option value="makeup">Makeup Services</option>
-                                        <option value="facial">Facial Treatments</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="specificService">Specific Service *</label>
-                                    <select
-                                        class="form-control"
-                                        id="specificService"
-                                        required
-                                        disabled>
-                                        <option value="">Select a service</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="service-addons">
-                                    <h4>Additional Services</h4>
-                                    <div class="addon-options">
-                                        <!-- Dynamically populated based on main service -->
+                <form method="POST" action="{{ route('bookings.store') }}" class="booking-form">
+                    @csrf
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <!-- Personal Information -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name *</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" required value="{{ old('fullName') }}" />
+                                        @error('fullName')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="price-summary card">
-                                    <div class="card-body">
-                                        <h4>Price Summary</h4>
-                                        <div class="price-breakdown">
-                                            <div class="base-price d-flex justify-content-between">
-                                                <span>Base Service:</span>
-                                                <span class="amount">Rs. 0.00</span>
-                                            </div>
-                                            <div
-                                                class="addons-price d-flex justify-content-between">
-                                                <span>Add-ons:</span>
-                                                <span class="amount">Rs. 0.00</span>
-                                            </div>
-                                            <hr />
-                                            <div class="total-price d-flex justify-content-between">
-                                                <strong>Total:</strong>
-                                                <strong class="amount">Rs. 0.00</strong>
-                                            </div>
-                                        </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required value="{{ old('phone') }}" />
+                                        @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}" />
+                                        @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="serviceCategory">Service Category *</label>
+                                        <select class="form-control" id="serviceCategory" name="serviceCategory" required>
+                                            <option value="">Select a category</option>
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ old('serviceCategory') == $category->id ? 'selected' : 
+                                                   ($selectedCategory && $selectedCategory->id == $category->id ? 'selected' : '') }}>
+                                                {{ $category->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('serviceCategory')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="service">Service *</label>
+                                        <select class="form-control" id="service" name="service" required>
+                                            <option value="">Select a service</option>
+                                            @foreach($services as $service)
+                                            <option value="{{ $service->id }}"
+                                                data-price="{{ $service->price }}"
+                                                {{ old('service') == $service->id ? 'selected' : 
+                                                   ($selectedService && $selectedService->id == $service->id ? 'selected' : '') }}>
+                                                {{ $service->name }} - Rs. {{ number_format($service->price, 2) }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('service')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="appointmentDate">Preferred Date *</label>
+                                        <input type="date" class="form-control" id="appointmentDate" name="appointmentDate" required min="{{ date('Y-m-d') }}" value="{{ old('appointmentDate') }}" />
+                                        @error('appointmentDate')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="appointmentTime">Preferred Time *</label>
+                                        <select class="form-control" id="appointmentTime" name="appointmentTime" required>
+                                            <option value="">Select time</option>
+                                            @foreach($timeSlots as $slot)
+                                            <option value="{{ $slot }}" {{ old('appointmentTime') == $slot ? 'selected' : '' }}>
+                                                {{ $slot }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('appointmentTime')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="stylist">Preferred Stylist (Optional)</label>
+                                        <select class="form-control" id="stylist" name="stylist">
+                                            <option value="">No preference</option>
+                                            @foreach($stylists as $stylist)
+                                            <option value="{{ $stylist->id }}" {{ old('stylist') == $stylist->id ? 'selected' : '' }}>
+                                                {{ $stylist->name }} - {{ $stylist->specialization }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="requirements">Special Requirements or Allergies</label>
+                                        <textarea class="form-control" id="requirements" name="requirements" rows="3">{{ old('requirements') }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="termsAccept" name="termsAccept" required {{ old('termsAccept') ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="termsAccept">
+                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                                        </label>
+                                        @error('termsAccept')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Book Appointment</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Step 3: Appointment Scheduling -->
-                    <div class="form-step" id="step3">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="appointmentDate">Select Date *</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="appointmentDate"
-                                        required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="appointmentTime">Select Time *</label>
-                                    <select
-                                        class="form-control"
-                                        id="appointmentTime"
-                                        required
-                                        disabled>
-                                        <option value="">Select a time slot</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="stylist">Preferred Stylist</label>
-                                    <select class="form-control" id="stylist">
-                                        <option value="">No preference</option>
-                                        <option value="jessica">
-                                            Jessica Chen - Master Stylist
-                                        </option>
-                                        <option value="sarah">
-                                            Sarah Johnson - Bridal Specialist
-                                        </option>
-                                        <option value="maria">
-                                            Maria Garcia - Makeup Artist
-                                        </option>
-                                        <option value="emily">
-                                            Emily Taylor - Color Specialist
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="alternative-slots">
-                                    <h4>Alternative Time Slots</h4>
-                                    <div class="slots-container">
-                                        <!-- Dynamically populated -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Payment Information -->
-                    <div class="form-step" id="step4">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="payment-summary card mb-4">
-                                    <div class="card-body">
-                                        <h4>Booking Summary</h4>
-                                        <div class="summary-details">
-                                            <!-- Dynamically populated -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="paymentMethod">Payment Method *</label>
-                                    <select class="form-control" id="paymentMethod" required>
-                                        <option value="">Select payment method</option>
-                                        <option value="cash">Cash at Salon</option>
-                                        <option value="card">Credit/Debit Card</option>
-                                        <option value="online">Online Payment</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-check mb-4">
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        id="termsAccept"
-                                        required />
-                                    <label class="form-check-label" for="termsAccept">
-                                        I agree to the
-                                        <a
-                                            href="#"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#termsModal">terms and conditions</a>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navigation Buttons -->
-                    <div class="form-navigation mt-4">
-                        <button
-                            type="button"
-                            class="btn btn-secondary prev-step"
-                            style="display: none">
-                            Previous
-                        </button>
-                        <button type="button" class="btn btn-primary next-step">
-                            Next
-                        </button>
-                        <button
-                            type="submit"
-                            class="btn btn-success submit-booking"
-                            style="display: none">
-                            Confirm Booking
-                        </button>
                     </div>
                 </form>
             </div>
@@ -287,16 +174,74 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Terms and Conditions</h5>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Terms content -->
+                    <p>By booking an appointment with SalonJC, you agree to the following terms:</p>
+                    <ul>
+                        <li>Please arrive 10 minutes before your scheduled appointment time</li>
+                        <li>A 24-hour notice is required for cancellation</li>
+                        <li>Late arrivals may result in reduced service time</li>
+                        <li>Prices may vary based on hair length and service complexity</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
     @endsection
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('serviceCategory');
+            const serviceSelect = document.getElementById('service');
+            const services = @json($services);
+
+            // Function to filter and update services dropdown
+            function updateServices(categoryId) {
+                // Clear current options except the first one
+                serviceSelect.innerHTML = '<option value="">Select a service</option>';
+
+                if (!categoryId) return;
+
+                // Filter and add services for selected category
+                services.filter(service => service.category_id == categoryId)
+                    .forEach(service => {
+                        const option = new Option(
+                            `${service.name} - Rs. ${parseFloat(service.price).toFixed(2)}`,
+                            service.id
+                        );
+                        option.dataset.price = service.price;
+                        serviceSelect.add(option);
+                    });
+
+                // If there was a pre-selected service and it belongs to this category, select it
+                @if(isset($selectedService))
+                if ({
+                        {
+                            $selectedService - > category_id
+                        }
+                    } == categoryId) {
+                    serviceSelect.value = {
+                        {
+                            $selectedService - > id
+                        }
+                    };
+                }
+                @endif
+            }
+
+            // Initialize services dropdown based on initial category selection
+            if (categorySelect.value) {
+                updateServices(categorySelect.value);
+            }
+
+            // Update services when category changes
+            categorySelect.addEventListener('change', function() {
+                updateServices(this.value);
+                serviceSelect.disabled = !this.value;
+            });
+        });
+    </script>
+    @endpush
 </x-app-layout>
