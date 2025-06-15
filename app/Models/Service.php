@@ -43,4 +43,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Specialist::class, 'service_specialist_mapping');
     }
+
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

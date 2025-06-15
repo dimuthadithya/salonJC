@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReviewController;
@@ -16,6 +17,15 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Admin routes
+    Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
+        Route::get('/bookings/{booking}', [AdminController::class, 'showBooking'])->name('admin.bookings.show');
+        Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
+        Route::get('/services/{service}/edit', [AdminController::class, 'editService'])->name('admin.services.edit');
+    });
 
     // Booking routes
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
