@@ -17,6 +17,7 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 });
 
 Route::middleware('auth')->group(function () {
