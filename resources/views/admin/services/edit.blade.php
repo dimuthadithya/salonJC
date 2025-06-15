@@ -70,7 +70,7 @@
 
             <!-- Service Form -->
             <div class="form-card">
-                <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.services.update', $service->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -127,48 +127,33 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Features</label>
                             <div class="features-container">
-                                @foreach($service->features as $feature)
+                                @forelse($service->features ?? [] as $feature)
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" name="features[]" value="{{ $feature }}" required>
                                     <button type="button" class="btn btn-danger remove-feature">-</button>
                                 </div>
-                                @endforeach
+                                @empty
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" name="features[]" required>
+                                    <button type="button" class="btn btn-success add-feature">+</button>
+                                </div>
+                                @endforelse
                             </div>
                             <button type="button" class="btn btn-success add-feature">Add Feature</button>
                             @error('features')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Current Images</label>
-                            @if($service->images->isNotEmpty())
-                            <div class="image-preview">
-                                @foreach($service->images as $image)
-                                <div class="image-container">
-                                    <img src="{{ asset('storage/' . $image->path) }}"
-                                        alt="{{ $service->name }}"
-                                        class="service-image">
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="replace_images" name="replace_images" value="1">
-                                <label class="form-check-label" for="replace_images">
-                                    Replace existing images
-                                </label>
-                            </div>
-                            @endif
-
-                            <label for="images" class="form-label">Upload New Images</label>
-                            <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                id="images" name="images[]" multiple accept="image/*">
-                            <small class="text-muted">You can select multiple images. Supported formats: JPEG, PNG, JPG</small>
-                            @error('images')
+                            <label for="icon" class="form-label">Service Icon</label>
+                            <input type="text" class="form-control @error('icon') is-invalid @enderror"
+                                id="icon" name="icon" value="{{ old('icon', $service->icon ? $service->icon->path : '') }}"
+                                placeholder="Enter Font Awesome icon class (e.g., fa-spa)" required>
+                            <small class="text-muted">Enter a Font Awesome icon class (e.g., fa-spa, fa-cut, fa-massage)</small>
+                            @error('icon')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

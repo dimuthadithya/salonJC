@@ -58,7 +58,7 @@ class AdminController extends Controller
     {
         $services = Service::query()
             ->withCount('bookings')
-            ->with(['category', 'images'])
+            ->with(['category', 'icon'])
             ->select('services.*')
             ->selectRaw('SUM(CASE WHEN bookings.payment_status = "paid" THEN bookings.total_price ELSE 0 END) as revenue')
             ->leftJoin('bookings', 'services.id', '=', 'bookings.service_id')
@@ -95,17 +95,14 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:service_categories,id',
             'status' => 'boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'icon' => 'required|string|max:50'
         ]);
 
-        $service = Service::create($validated);
+        $iconPath = $validated['icon'];
+        unset($validated['icon']);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('services', 'public');
-                $service->images()->create(['path' => $path]);
-            }
-        }
+        $service = Service::create($validated);
+        $service->icon()->create(['image_path' => $iconPath]);
 
         return redirect()->route('admin.services')->with('success', 'Service created successfully');
     }
@@ -126,24 +123,19 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:service_categories,id',
             'status' => 'boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'icon' => 'required|string|max:50'
         ]);
+
+        $iconPath = $validated['icon'];
+        unset($validated['icon']);
 
         $service->update($validated);
 
-        if ($request->hasFile('images')) {
-            // Delete old images if replace_images is checked
-            if ($request->boolean('replace_images')) {
-                foreach ($service->images as $image) {
-                    Storage::disk('public')->delete($image->path);
-                    $image->delete();
-                }
-            }
-
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('services', 'public');
-                $service->images()->create(['path' => $path]);
-            }
+        // Update or create icon
+        if ($service->icon) {
+            $service->icon->update(['image_path' => $iconPath]);
+        } else {
+            $service->icon()->create(['image_path' => $iconPath]);
         }
 
         return redirect()->route('admin.services')->with('success', 'Service updated successfully');
@@ -151,11 +143,6 @@ class AdminController extends Controller
 
     public function destroyService(Service $service)
     {
-        // Delete service images from storage
-        foreach ($service->images as $image) {
-            Storage::disk('public')->delete($image->path);
-        }
-
         $service->delete();
         return redirect()->route('admin.services')->with('success', 'Service deleted successfully');
     }

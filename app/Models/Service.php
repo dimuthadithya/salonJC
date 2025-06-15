@@ -34,14 +34,14 @@ class Service extends Model
         return $this->belongsTo(ServiceCategory::class, 'category_id');
     }
 
-    public function images(): HasMany
-    {
-        return $this->hasMany(ServiceImage::class);
-    }
-
     public function specialists(): BelongsToMany
     {
         return $this->belongsToMany(Specialist::class, 'service_specialist_mapping');
+    }
+
+    public function icon()
+    {
+        return $this->hasOne(ServiceImage::class)->select(['service_id', 'image_path as path']);
     }
 
     public function bookings(): HasMany

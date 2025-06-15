@@ -75,12 +75,9 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($service->images->first())
-                                        <img src="{{ asset('storage/' . $service->images->first()->path) }}"
-                                            alt="{{ $service->name }}"
-                                            class="rounded me-2"
-                                            style="width: 40px; height: 40px; object-fit: cover;">
-                                        @endif
+                                        <div class="me-3">
+                                            <i class="fas {{ $service->icon ? $service->icon->path : 'fa-spa' }} fa-2x"></i>
+                                        </div>
                                         <div>
                                             <div class="fw-bold">{{ $service->name }}</div>
                                             <small class="text-muted">{{ Str::limit($service->description, 50) }}</small>

@@ -99,13 +99,13 @@
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="col-md-12 mb-3">
-                            <label for="images" class="form-label">Service Images</label>
-                            <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                id="images" name="images[]" multiple accept="image/*">
-                            <small class="text-muted">You can select multiple images. Supported formats: JPEG, PNG, JPG</small>
-                            @error('images')
+                            <label for="icon" class="form-label">Service Icon</label>
+                            <input type="text" class="form-control @error('icon') is-invalid @enderror"
+                                id="icon" name="icon" value="{{ old('icon') }}"
+                                placeholder="Enter Font Awesome icon class (e.g., fa-spa)" required>
+                            <small class="text-muted">Enter a Font Awesome icon class (e.g., fa-spa, fa-cut, fa-massage)</small>
+                            @error('icon')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
