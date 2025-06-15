@@ -205,7 +205,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #2196F3;">
                                                 <i class="fas fa-calendar-check"></i>
                                             </div>
                                             <h4>{{ $upcomingAppointments->count() }}</h4>
@@ -214,34 +214,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
-                                                <i class="fas fa-check-circle"></i>
-                                            </div>
-                                            <h4>{{ $completedSessions }}</h4>
-                                            <p>Completed Sessions</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="action-card">
-                                            <div class="action-icon">
-                                                <i class="fas fa-money-bill-wave"></i>
-                                            </div>
-                                            <h4>{{ number_format($totalSpent, 2) }} LKR</h4>
-                                            <p>Total Spent</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="action-card">
-                                            <div class="action-icon" style="background: #ffcccc; color: #ff4444;">
-                                                <i class="fas fa-times-circle"></i>
-                                            </div>
-                                            <h4>{{ $cancelledAppointments }}</h4>
-                                            <p>Cancelled Appointments</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #9C27B0;">
                                                 <i class="fas fa-history"></i>
                                             </div>
                                             <h4>{{ $pastAppointments->count() }}</h4>
@@ -250,19 +223,19 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #4CAF50;">
                                                 <i class="fas fa-check-circle"></i>
                                             </div>
-                                            <h4>{{ $pastAppointments->where('status', 'completed')->count() }}</h4>
+                                            <h4>{{ $completedSessions }}</h4>
                                             <p>Completed Sessions</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="action-card">
-                                            <div class="action-icon">
+                                            <div class="action-icon" style="background: #FF9800;">
                                                 <i class="fas fa-coins"></i>
                                             </div>
-                                            <h4>{{ number_format($pastAppointments->sum('total_price'), 2) }} LKR</h4>
+                                            <h4>{{ number_format($totalSpent, 2) }} LKR</h4>
                                             <p>Total Spent</p>
                                         </div>
                                     </div>
