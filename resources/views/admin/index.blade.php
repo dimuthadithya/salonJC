@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     @push('styles')
     <style>
         .admin-dashboard {
@@ -257,4 +257,4 @@
         </div>
     </div>
     @endsection
-</x-app-layout>
+</x-admin-layout>

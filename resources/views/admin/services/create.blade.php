@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     @push('styles')
     <style>
         .services-page {
@@ -153,4 +153,4 @@
     </script>
     @endpush
     @endsection
-</x-app-layout>
+</x-admin-layout>
