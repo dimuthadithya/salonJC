@@ -36,6 +36,39 @@
             background: #E6B800;
             transform: scale(1.1);
         }
+
+        /* Dark theme input styles */
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+            color: #fff;
+        }
+
+        .form-control:disabled {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group label {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
     </style>
     @endpush
 
