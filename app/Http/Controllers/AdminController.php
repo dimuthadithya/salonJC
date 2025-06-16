@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ServiceCategory;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -171,5 +172,62 @@ class AdminController extends Controller
 
         $booking->update($validated);
         return redirect()->back()->with('success', 'Booking status updated successfully');
+    }
+
+    // User Management Methods
+    public function users()
+    {
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function createUser()
+    {
+        return view('admin.users.create');
+    }
+
+
+
+    public function editUser(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required|in:user,admin',
+        ]);
+
+        $updateData = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'role' => $validated['role'],
+        ];
+
+        if (!empty($validated['password'])) {
+            $updateData['password'] = bcrypt($validated['password']);
+        }
+
+        $user->update($updateData);
+
+        return redirect()->route('admin.users.index')
+            ->with('user_updated', 'User updated successfully.');
+    }
+
+    public function destroyUser(User $user)
+    {
+        if ($user->id === auth::id()) {
+            return redirect()->route('admin.users.index')
+                ->with('error', 'You cannot delete your own account.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.users.index')
+            ->with('user_deleted', 'User deleted successfully.');
     }
 }

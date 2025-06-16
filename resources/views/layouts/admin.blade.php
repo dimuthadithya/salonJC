@@ -153,7 +153,7 @@
                 <span style="color: #D4AF37;">SalonJC</span> Admin
             </a>
         </div>
-        <ul class="nav flex-column mt-4">
+        <ul class="mt-4 nav flex-column">
             <li class="nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fas fa-home"></i>
@@ -178,13 +178,18 @@
                     Categories
                 </a>
             </li>
+            <li class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users.index') }}" class="nav-link">
+                    <i class="fas fa-users"></i> Users
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link" target="_blank">
                     <i class="fas fa-globe"></i>
                     Visit Website
                 </a>
             </li>
-            <li class="nav-item mt-4">
+            <li class="mt-4 nav-item">
                 <form method="POST" action="{{ route('logout') }}" class="nav-link" style="cursor: pointer;"
                     onclick="event.preventDefault(); this.closest('form').submit();">
                     @csrf

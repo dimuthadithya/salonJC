@@ -37,6 +37,13 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
         Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
 
+        // Users routes
+        Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
+
+        Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+        Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+        Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+
         // Categories routes
         Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
         Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
