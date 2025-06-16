@@ -93,38 +93,38 @@
                     @method('PUT')
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name{{ $user->id }}" class="form-label">Name</label>
+                            <label for="edit_name_{{ $user->id }}" class="form-label">Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                id="name{{ $user->id }}" name="name" value="{{ old('name', $user->name) }}" required>
+                                id="edit_name_{{ $user->id }}" name="name" value="{{ old('name', $user->name) }}" required>
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email{{ $user->id }}" class="form-label">Email</label>
+                            <label for="edit_email_{{ $user->id }}" class="form-label">Email</label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                id="email{{ $user->id }}" name="email" value="{{ old('email', $user->email) }}" required>
+                                id="edit_email_{{ $user->id }}" name="email" value="{{ old('email', $user->email) }}" required>
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password{{ $user->id }}" class="form-label">New Password (leave blank to keep current)</label>
+                            <label for="edit_password_{{ $user->id }}" class="form-label">New Password (leave blank to keep current)</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="password{{ $user->id }}" name="password">
+                                id="edit_password_{{ $user->id }}" name="password">
                             @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password_confirmation{{ $user->id }}" class="form-label">Confirm New Password</label>
+                            <label for="edit_password_confirmation_{{ $user->id }}" class="form-label">Confirm New Password</label>
                             <input type="password" class="form-control"
-                                id="password_confirmation{{ $user->id }}" name="password_confirmation">
+                                id="edit_password_confirmation_{{ $user->id }}" name="password_confirmation">
                         </div>
                         <div class="mb-3">
-                            <label for="role{{ $user->id }}" class="form-label">Role</label>
+                            <label for="edit_role_{{ $user->id }}" class="form-label">Role</label>
                             <select class="form-select @error('role') is-invalid @enderror"
-                                id="role{{ $user->id }}" name="role" required>
+                                id="edit_role_{{ $user->id }}" name="role" required>
                                 <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
                                 <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                             </select>
@@ -143,4 +143,33 @@
     </div>
     @endforeach
     @endsection
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all modals
+            var editModals = document.querySelectorAll('.modal');
+            editModals.forEach(function(modal) {
+                new bootstrap.Modal(modal);
+            });
+
+            // Clear form errors when modal is closed
+            editModals.forEach(function(modal) {
+                modal.addEventListener('hidden.bs.modal', function() {
+                    var form = modal.querySelector('form');
+                    if (form) {
+                        var errorElements = form.querySelectorAll('.is-invalid');
+                        errorElements.forEach(function(element) {
+                            element.classList.remove('is-invalid');
+                        });
+                        var feedbackElements = form.querySelectorAll('.invalid-feedback');
+                        feedbackElements.forEach(function(element) {
+                            element.remove();
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    @endpush
 </x-admin-layout>
