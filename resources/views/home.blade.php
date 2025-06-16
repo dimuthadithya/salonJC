@@ -6,14 +6,15 @@
         <div class="container h-100">
             <div
                 class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-10 text-center text-white hero-content">
+                <div class="text-center text-white col-lg-10 hero-content">
                     <h1 class="mb-3">Welcome to Salon JC</h1>
-                    <h2 class="mb-4"><span id="typed-tagline"></span></h2>
-                    <p class="lead mb-4">
-                        <span id="typed-description"></span>
+                    <h2 class="mb-4">Your Premier Beauty Destination</h2>
+                    <p class="mb-4 lead">
+                        Experience luxury beauty services with our expert team of professionals.
+                        We provide top-quality salon services that enhance your natural beauty.
                     </p>
-                    <div class="hero-features mb-5">
-                        <div class="d-flex justify-content-center gap-4">
+                    <div class="mb-5 hero-features">
+                        <div class="gap-4 d-flex justify-content-center">
                             <span><i class="fas fa-star me-2"></i> Expert
                                 Beauticians</span>
                             <span><i class="fas fa-certificate me-2"></i>
@@ -23,32 +24,26 @@
                         </div>
                     </div>
                     <div
-                        class="hero-cta mb-5 d-flex justify-content-center align-items-center gap-4">
+                        class="gap-4 mb-5 hero-cta d-flex justify-content-center align-items-center">
                         <a href="{{ route('booking') }}" class="book-now-btn">Book Your Appointment Now</a>
                         <a href="{{ route('services') }}" class="services-btn">View Our Services</a>
                     </div>
                     <div class="hero-badges">
                         <div
-                            class="d-flex justify-content-center gap-4 flex-wrap">
+                            class="flex-wrap gap-4 d-flex justify-content-center">
                             <div class="badge-item">
-                                <i class="fas fa-users mb-3"></i>
-                                <h4>
-                                    <span id="experienceCounter">10</span>+
-                                </h4>
+                                <i class="mb-3 fas fa-users"></i>
+                                <h4>10+</h4>
                                 <p>Years Experience</p>
                             </div>
                             <div class="badge-item">
-                                <i class="fas fa-smile mb-3"></i>
-                                <h4>
-                                    <span id="clientsCounter">1000</span>+
-                                </h4>
+                                <i class="mb-3 fas fa-smile"></i>
+                                <h4>1000+</h4>
                                 <p>Happy Clients</p>
                             </div>
                             <div class="badge-item">
-                                <i class="fas fa-award mb-3"></i>
-                                <h4>
-                                    <span id="satisfactionCounter">100</span>%
-                                </h4>
+                                <i class="mb-3 fas fa-award"></i>
+                                <h4>100%</h4>
                                 <p>Satisfaction</p>
                             </div>
                         </div>
@@ -85,7 +80,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="gallery-section py-5 bg-dark text-white">
+    <section id="gallery" class="py-5 text-white gallery-section bg-dark">
         <div class="container">
             <div class="section-title">
                 <span class="subtitle">Our Gallery</span>
@@ -96,7 +91,7 @@
             </div>
 
             <!-- Gallery Categories -->
-            <div class="gallery-filter mb-5 justify-content-center d-flex">
+            <div class="mb-5 gallery-filter justify-content-center d-flex">
                 <ul
                     class="nav nav-pills justify-content-center"
                     id="gallery-tabs"
@@ -433,10 +428,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5 bg-dark text-white">
+    <section id="about" class="py-5 text-white bg-dark">
         <div class="container">
             <!-- Main About Content -->
-            <div class="section-title mb-5">
+            <div class="mb-5 section-title">
                 <span class="subtitle">About Us</span>
                 <h2>Welcome to SalonJC</h2>
                 <p class="text-light-50">
@@ -444,11 +439,11 @@
                 </p>
             </div>
 
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="mb-5 row align-items-center">
+                <div class="mb-4 col-lg-6 mb-lg-0">
                     <div class="about-content">
                         <h3>Your Journey to Beauty</h3>
-                        <p class="lead text-gold mb-4">
+                        <p class="mb-4 lead text-gold">
                             Dedicated to elevating your natural beauty since
                             2025.
                         </p>
@@ -459,7 +454,7 @@
                             uses premium products and advanced techniques to
                             help you achieve your desired look.
                         </p>
-                        <div class="mt-4 d-flex gap-4">
+                        <div class="gap-4 mt-4 d-flex">
                             <div class="achievement-box">
                                 <i class="fas fa-award"></i>
                                 <h4>10+</h4>
@@ -484,7 +479,7 @@
                             src="{{ asset('assets/img/about/salon-interior.jpg') }}"
                             alt="Salon Interior"
                             class="img-fluid rounded-3 main-image" />
-                        <div class="image-grid mt-4">
+                        <div class="mt-4 image-grid">
                             <img
                                 src="{{ asset('assets/img/about/service-1.jpg') }}"
                                 alt="Beauty Service"
@@ -499,7 +494,7 @@
             </div>
 
             <!-- Team Section -->
-            <div class="section-title mt-5 mb-4">
+            <div class="mt-5 mb-4 section-title">
                 <span class="subtitle">Our Team</span>
                 <h2>Meet Our Experts</h2>
                 <p class="text-light-50">
@@ -586,106 +581,13 @@
                 </div>
             </div>
 
-            <!-- Testimonials Section -->
-            <div class="section-title mt-5 mb-4">
-                <span class="subtitle">Testimonials</span>
-                <h2>What Our Clients Say</h2>
-                <p class="text-light-50">
-                    Real experiences from our valued customers
-                </p>
-            </div>
-
-            <div class="testimonials-slider">
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="testimonial-card">
-                            <div class="testimonial-img">
-                                <img
-                                    src="{{ asset('assets/img/testimonials/client-1.jpg') }}"
-                                    alt="Client"
-                                    class="img-fluid rounded-circle" />
-                            </div>
-                            <div class="testimonial-content">
-                                <div class="rating mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p>
-                                    "Amazing bridal makeup service! They
-                                    made me look and feel absolutely
-                                    stunning on my special day. Highly
-                                    recommended!"
-                                </p>
-                                <h5>Amanda White</h5>
-                                <span>Bridal Client</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="testimonial-card">
-                            <div class="testimonial-img">
-                                <img
-                                    src="{{ asset('assets/img/testimonials/client-2.jpg') }}"
-                                    alt="Client"
-                                    class="img-fluid rounded-circle" />
-                            </div>
-                            <div class="testimonial-content">
-                                <div class="rating mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p>
-                                    "The team at SalonJC are true
-                                    professionals. The hair coloring service
-                                    was perfect, exactly what I wanted!"
-                                </p>
-                                <h5>Sophie Chen</h5>
-                                <span>Regular Client</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="testimonial-card">
-                            <div class="testimonial-img">
-                                <img
-                                    src="{{ asset('assets/img/testimonials/client-3.jpg') }}"
-                                    alt="Client"
-                                    class="img-fluid rounded-circle" />
-                            </div>
-                            <div class="testimonial-content">
-                                <div class="rating mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p>
-                                    "Exceptional service every time! The
-                                    facial treatments are amazing and the
-                                    staff is always friendly and
-                                    professional."
-                                </p>
-                                <h5>Rachel Kim</h5>
-                                <span>Loyal Client</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 bg-dark text-white">
+    <section id="contact" class="py-5 text-white bg-dark">
         <div class="container">
-            <div class="section-title mb-5">
+            <div class="mb-5 section-title">
                 <span class="subtitle">Contact Us</span>
                 <h2>Get In Touch</h2>
                 <p class="text-light-50">We'd Love to Hear From You</p>
@@ -730,7 +632,7 @@
                         </div>
                         <h4>Email Us</h4>
                         <p>salonjc2092@gmail.com</p>
-                        <div class="social-links mt-3">
+                        <div class="mt-3 social-links">
                             <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
                             <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
                             <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
