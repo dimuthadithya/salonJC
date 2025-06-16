@@ -195,7 +195,7 @@ class AdminController extends Controller
             'role' => 'required|in:user,admin',
         ]);
 
-        $user = User::create([
+        User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
@@ -203,7 +203,7 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User created successfully.');
+            ->with('user_created', 'User created successfully.');
     }
 
     public function editUser(User $user)
@@ -220,23 +220,25 @@ class AdminController extends Controller
             'role' => 'required|in:user,admin',
         ]);
 
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->role = $validated['role'];
+        $updateData = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'role' => $validated['role'],
+        ];
 
         if (!empty($validated['password'])) {
-            $user->password = bcrypt($validated['password']);
+            $updateData['password'] = bcrypt($validated['password']);
         }
 
-        $user->save();
+        $user->update($updateData);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User updated successfully.');
+            ->with('user_updated', 'User updated successfully.');
     }
 
     public function destroyUser(User $user)
     {
-        if ($user->id === Auth::id()) {
+        if ($user->id === auth::id()) {
             return redirect()->route('admin.users.index')
                 ->with('error', 'You cannot delete your own account.');
         }
@@ -244,6 +246,6 @@ class AdminController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User deleted successfully.');
+            ->with('user_deleted', 'User deleted successfully.');
     }
 }

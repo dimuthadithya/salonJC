@@ -1,4 +1,6 @@
 <x-admin-layout>
+
+
     @section('title', 'User Management')
 
     @section('content')
@@ -12,9 +14,30 @@
             </div>
         </div>
 
-        @if(session('success'))
+        @if(session('user_created'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
+            {{ session('user_created') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(session('user_updated'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session('user_updated') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(session('user_deleted'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('user_deleted') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
