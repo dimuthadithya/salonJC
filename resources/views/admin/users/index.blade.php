@@ -54,10 +54,10 @@
                                         {{ ucfirst($user->role) }}
                                     </span>
                                 </td>
-                                <td>{{ $user->created_at->format('M d, Y') }}</td>
-                                <td> <button type="button" class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}">
+                                <td>{{ $user->created_at->format('M d, Y') }}</td>                                <td>
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-info me-2">
                                         <i class="fas fa-edit"></i>
-                                    </button>
+                                    </a>
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -78,70 +78,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Edit User Modals -->
-    @foreach($users as $user)
-    <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="edit_name_{{ $user->id }}" class="form-label">Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                id="edit_name_{{ $user->id }}" name="name" value="{{ old('name', $user->name) }}" required>
-                            @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_email_{{ $user->id }}" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                id="edit_email_{{ $user->id }}" name="email" value="{{ old('email', $user->email) }}" required>
-                            @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_password_{{ $user->id }}" class="form-label">New Password (leave blank to keep current)</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                id="edit_password_{{ $user->id }}" name="password">
-                            @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_password_confirmation_{{ $user->id }}" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control"
-                                id="edit_password_confirmation_{{ $user->id }}" name="password_confirmation">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_role_{{ $user->id }}" class="form-label">Role</label>
-                            <select class="form-select @error('role') is-invalid @enderror"
-                                id="edit_role_{{ $user->id }}" name="role" required>
-                                <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
-                                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                            </select>
-                            @error('role')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update User</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    @endforeach
     @endsection
 
     @push('scripts')
