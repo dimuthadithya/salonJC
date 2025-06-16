@@ -186,25 +186,7 @@ class AdminController extends Controller
         return view('admin.users.create');
     }
 
-    public function storeUser(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:user,admin',
-        ]);
 
-        User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-            'role' => $validated['role'],
-        ]);
-
-        return redirect()->route('admin.users.index')
-            ->with('user_created', 'User created successfully.');
-    }
 
     public function editUser(User $user)
     {

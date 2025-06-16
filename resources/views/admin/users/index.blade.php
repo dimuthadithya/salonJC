@@ -7,21 +7,7 @@
     <div class="container-fluid">
         <div class="flex-wrap pt-3 pb-2 mb-3 d-flex justify-content-between flex-md-nowrap align-items-center border-bottom">
             <h1 class="h2">User Management</h1>
-            <div class="mb-2 btn-toolbar mb-md-0">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                    <i class="fas fa-plus"></i> Add New User
-                </button>
-            </div>
-        </div>
-
-        @if(session('user_created'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('user_created') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        @if(session('user_updated'))
+        </div> @if(session('user_updated'))
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             {{ session('user_updated') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -69,10 +55,9 @@
                                     </span>
                                 </td>
                                 <td>{{ $user->created_at->format('M d, Y') }}</td>
-                                <td>
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-info me-2">
+                                <td> <button type="button" class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}">
                                         <i class="fas fa-edit"></i>
-                                    </a>
+                                    </button>
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -94,47 +79,54 @@
         </div>
     </div>
 
-    <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1">
+    <!-- Edit User Modals -->
+    @foreach($users as $user)
+    <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New User</h5>
+                    <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="{{ route('admin.users.store') }}" method="POST">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            <label for="name{{ $user->id }}" class="form-label">Name</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                id="name{{ $user->id }}" name="name" value="{{ old('name', $user->name) }}" required>
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                            <label for="email{{ $user->id }}" class="form-label">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email{{ $user->id }}" name="email" value="{{ old('email', $user->email) }}" required>
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                            <label for="password{{ $user->id }}" class="form-label">New Password (leave blank to keep current)</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password{{ $user->id }}" name="password">
                             @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            <label for="password_confirmation{{ $user->id }}" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control"
+                                id="password_confirmation{{ $user->id }}" name="password_confirmation">
                         </div>
                         <div class="mb-3">
-                            <label for="role" class="form-label">Role</label>
-                            <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
-                                <option value="user" {{ old('role') === 'user' ? 'selected' : '' }}>User</option>
-                                <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                            <label for="role{{ $user->id }}" class="form-label">Role</label>
+                            <select class="form-select @error('role') is-invalid @enderror"
+                                id="role{{ $user->id }}" name="role" required>
+                                <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                             </select>
                             @error('role')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -143,11 +135,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button type="submit" class="btn btn-primary">Update User</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    @endforeach
     @endsection
 </x-admin-layout>
