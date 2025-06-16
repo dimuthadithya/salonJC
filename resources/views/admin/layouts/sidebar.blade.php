@@ -13,7 +13,6 @@
                 <i class="fas fa-spa"></i> Services
             </a>
         </li>
-
         <li class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
             <a href="{{ route('admin.categories') }}">
                 <i class="fas fa-list"></i> Categories
