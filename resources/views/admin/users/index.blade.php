@@ -54,7 +54,8 @@
                                         {{ ucfirst($user->role) }}
                                     </span>
                                 </td>
-                                <td>{{ $user->created_at->format('M d, Y') }}</td>                                <td>
+                                <td>{{ $user->created_at->format('M d, Y') }}</td>
+                                <td>
                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-info me-2">
                                         <i class="fas fa-edit"></i>
                                     </a>
