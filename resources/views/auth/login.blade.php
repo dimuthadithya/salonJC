@@ -18,6 +18,9 @@
 </head>
 
 <body>
+    <a href="{{ url('/') }}" class="back-to-home">
+        <i class="fas fa-arrow-left me-2"></i>Back to Home
+    </a>
     <section class="auth-section">
         <div class="container">
             <div class="auth-card">

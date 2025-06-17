@@ -125,6 +125,25 @@
     margin-top: 0.25rem;
 }
 
+.back-to-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    color: #6c757d;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-home:hover {
+    color: var(--primary-color);
+    transform: translateX(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
 /* Responsive adjustments */
 @media (max-width: 576px) {
     .auth-card {
