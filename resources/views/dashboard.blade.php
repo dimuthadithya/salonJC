@@ -1,6 +1,8 @@
 <x-app-layout>
     @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+    <!-- Add Bootstrap CSS if not already included in the layout -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .profile-image {
             position: relative;
@@ -118,12 +120,229 @@
             margin: 0;
             font-size: 0.9rem;
         }
+
+        /* Status badges */
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .status.pending {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .status.confirmed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status.cancelled {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status.completed {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        /* Action buttons */
+        .btn-cancel {
+            background: #ffebee;
+            color: #c62828;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #ef5350;
+            color: white;
+        }
+
+        .btn-reschedule {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reschedule:hover {
+            background: #1e88e5;
+            color: white;
+        }
+
+        .btn-review {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-review:hover {
+            background: #43a047;
+            color: white;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            background: #fff;
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 1.5rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-title {
+            color: #333;
+            font-weight: 600;
+        }
+
+        #rescheduleForm .form-control {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        #rescheduleForm .form-control:focus {
+            border-color: #1e88e5;
+            box-shadow: 0 0 0 0.2rem rgba(30, 136, 229, 0.25);
+        }
     </style>
     @endpush
 
     @push('scripts')
-    <!-- No JavaScript needed for profile photo upload -->
+    <!-- Add jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Bootstrap modal
+            const rescheduleModal = new bootstrap.Modal(document.getElementById('rescheduleModal'));
+
+            // Handle booking cancellation
+            $('.btn-cancel').click(function() {
+                if (confirm('Are you sure you want to cancel this booking?')) {
+                    const appointmentItem = $(this).closest('.appointment-item');
+                    const bookingId = appointmentItem.data('booking-id');
+
+                    $.ajax({
+                        url: `/bookings/${bookingId}/cancel`,
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        },
+                        error: function(error) {
+                            alert('Failed to cancel booking. Please try again.');
+                        }
+                    });
+                }
+            });
+
+            // Handle reschedule button clicks
+            $('.btn-reschedule').on('click', function(e) {
+                e.preventDefault();
+                const appointmentItem = $(this).closest('.appointment-item');
+                const bookingId = appointmentItem.data('booking-id');
+                $('#rescheduleBookingId').val(bookingId);
+                rescheduleModal.show();
+            });
+
+            // Handle reschedule form submission
+            $('#rescheduleForm').submit(function(e) {
+                e.preventDefault();
+                const bookingId = $('#rescheduleBookingId').val();
+                const formData = $(this).serialize();
+
+                // Validate date is at least 2 days in future
+                const selectedDate = new Date($('#appointment_date').val());
+                const minDate = new Date();
+                minDate.setDate(minDate.getDate() + 2);
+
+                if (selectedDate < minDate) {
+                    alert('Please select a date at least 2 days in the future.');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/bookings/${bookingId}/reschedule`,
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        rescheduleModal.hide();
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        if (error.responseJSON && error.responseJSON.message) {
+                            alert(error.responseJSON.message);
+                        } else {
+                            alert('Failed to reschedule booking. Please try again.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     @endpush
+
+    <!-- Reschedule Modal -->
+    <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rescheduleModalLabel">Reschedule Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="rescheduleForm">
+                        @csrf
+                        <input type="hidden" id="rescheduleBookingId" name="booking_id">
+                        <div class="mb-3">
+                            <label for="appointment_date" class="form-label">New Date</label>
+                            <input type="date" class="form-control" id="appointment_date" name="appointment_date" required
+                                min="{{ now()->addDays(2)->format('Y-m-d') }}">
+                            <div class="form-text">Must be at least 2 days from today.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointment_time" class="form-label">New Time</label>
+                            <select class="form-control" id="appointment_time" name="appointment_time" required>
+                                @foreach($timeSlots as $slot)
+                                <option value="{{ $slot }}">{{ date('g:i A', strtotime($slot)) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="px-0 pb-0 modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Confirm Reschedule</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @section('content')
     <!-- Dashboard Section -->
     <section class="dashboard-section">
@@ -253,7 +472,7 @@
                                 </div>
                                 <div class="appointment-list">
                                     @forelse($upcomingAppointments as $appointment)
-                                    <div class="appointment-item">
+                                    <div class="appointment-item" data-booking-id="{{ $appointment->id }}">
                                         <div class="appointment-date">
                                             <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
                                             <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
@@ -262,11 +481,18 @@
                                             <h4>{{ $appointment->service->name }}</h4>
                                             <p><i class="fas fa-clock"></i> {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('g:i A') }}</p>
                                             <p><i class="fas fa-money-bill"></i> {{ number_format($appointment->total_price, 2) }} LKR</p>
+                                            <span class="status {{ $appointment->status }}">{{ ucfirst($appointment->status) }}</span>
                                         </div>
                                         <div class="appointment-actions">
-                                            <button class="btn btn-{{ $appointment->status === 'confirmed' ? 'reschedule' : 'cancel' }}">
-                                                {{ $appointment->status === 'confirmed' ? 'Reschedule' : 'Cancel' }}
+                                            @if($appointment->status === 'pending')
+                                            <button class="btn btn-cancel">
+                                                <i class="fas fa-times"></i> Cancel
                                             </button>
+                                            @elseif($appointment->status === 'confirmed')
+                                            <button class="btn btn-reschedule">
+                                                <i class="fas fa-calendar-alt"></i> Reschedule
+                                            </button>
+                                            @endif
                                         </div>
                                     </div>
                                     @empty
@@ -295,7 +521,7 @@
                                 <div class="mb-4 timeline-section">
                                     <h3>Upcoming Appointments</h3>
                                     @forelse($upcomingAppointments as $appointment)
-                                    <div class="appointment-item">
+                                    <div class="appointment-item" data-booking-id="{{ $appointment->id }}">
                                         <div class="appointment-date">
                                             <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
                                             <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>
@@ -310,6 +536,10 @@
                                             @if($appointment->status === 'pending')
                                             <button class="btn btn-cancel">
                                                 <i class="fas fa-times"></i> Cancel
+                                            </button>
+                                            @elseif($appointment->status === 'confirmed')
+                                            <button class="btn btn-reschedule">
+                                                <i class="fas fa-calendar-alt"></i> Reschedule
                                             </button>
                                             @endif
                                         </div>
@@ -326,7 +556,7 @@
                                 <div class="timeline-section">
                                     <h3>Past Appointments</h3>
                                     @forelse($pastAppointments as $appointment)
-                                    <div class="appointment-item {{ $appointment->status }}">
+                                    <div class="appointment-item {{ $appointment->status }}" data-booking-id="{{ $appointment->id }}">
                                         <div class="appointment-date">
                                             <span class="date">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d') }}</span>
                                             <span class="month">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M') }}</span>

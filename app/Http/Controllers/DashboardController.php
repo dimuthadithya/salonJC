@@ -48,13 +48,31 @@ class DashboardController extends Controller
             ->where('status', 'cancelled')
             ->count();
 
+        // Get time slots for rescheduling
+        $timeSlots = $this->getTimeSlots();
+
         return view('dashboard', compact(
             'user',
             'upcomingAppointments',
             'pastAppointments',
             'totalSpent',
             'completedSessions',
-            'cancelledAppointments'
+            'cancelledAppointments',
+            'timeSlots'
         ));
+    }
+
+    private function getTimeSlots()
+    {
+        $slots = [];
+        $start = strtotime('09:00');
+        $end = strtotime('20:00');
+        $interval = 30 * 60; // 30 minutes
+
+        for ($time = $start; $time <= $end; $time += $interval) {
+            $slots[] = date('H:i', $time);
+        }
+
+        return $slots;
     }
 }

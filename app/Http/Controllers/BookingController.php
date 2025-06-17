@@ -150,4 +150,48 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         return view('booking.success', compact('booking'));
     }
+
+    public function cancel($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // Only allow cancellation if booking is pending and not yet cancelled
+        if ($booking->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending bookings can be cancelled.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking cancelled successfully.');
+    }
+
+    public function reschedule(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // Only allow rescheduling if booking is confirmed
+        if ($booking->status !== 'confirmed') {
+            return redirect()->back()->with('error', 'Only confirmed bookings can be rescheduled.');
+        }
+
+        // Validate new date is at least 2 days in advance
+        $request->validate([
+            'appointment_date' => [
+                'required',
+                'date',
+                'after:' . now()->addDays(2)->format('Y-m-d')
+            ],
+            'appointment_time' => 'required'
+        ]);
+
+        $booking->update([
+            'appointment_date' => $request->appointment_date,
+            'appointment_time' => $request->appointment_time
+        ]);
+
+        return redirect()->back()->with('success', 'Booking rescheduled successfully.');
+    }
 }
