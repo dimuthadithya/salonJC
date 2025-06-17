@@ -137,9 +137,8 @@ class BookingController extends Controller
         $booking->update([
             'payment_status' => 'paid',
             'payment_method' => 'credit_card',
-            'transaction_id' => 'TXN_' . uniqid(),
-            'status' => 'confirmed',
-            'confirmed_at' => now()
+            'transaction_id' => 'TXN_' . uniqid()
+            // Status remains 'pending' until admin confirms
         ]);
 
         return redirect()->route('booking.payment.success', $booking->id);
