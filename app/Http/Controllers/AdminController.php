@@ -174,6 +174,34 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Booking status updated successfully');
     }
 
+    public function confirmBooking(Booking $booking)
+    {
+        if ($booking->status !== 'pending' || $booking->payment_status !== 'paid') {
+            return redirect()->back()->with('error', 'Only pending bookings with paid status can be confirmed.');
+        }
+
+        $booking->update([
+            'status' => 'confirmed',
+            'confirmed_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been confirmed successfully.');
+    }
+
+    public function rejectBooking(Booking $booking)
+    {
+        if ($booking->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending bookings can be rejected.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been rejected successfully.');
+    }
+
     // User Management Methods
     public function users()
     {

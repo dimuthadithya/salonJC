@@ -54,7 +54,7 @@
     @section('content')
     <div class="bookings-page">
         <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
                 <h2 class="mb-0">Manage Bookings</h2>
             </div>
 
@@ -63,14 +63,16 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Booking ID</th>
-                                <th>Customer</th>
-                                <th>Contact</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                                 <th>Service</th>
-                                <th>Date & Time</th>
-                                <th>Amount</th>
-                                <th>Booking Status</th>
-                                <th>Payment Status</th>
+                                <th>Specialist</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Price</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -79,24 +81,33 @@
                             <tr>
                                 <td>#{{ $booking->id }}</td>
                                 <td>{{ $booking->full_name }}</td>
-                                <td>
-                                    <div>{{ $booking->email }}</div>
-                                    <small>{{ $booking->phone }}</small>
-                                </td>
-                                <td>
-                                    <div>{{ $booking->service->name }}</div>
-                                    <small class="text-muted">{{ $booking->category->name }}</small>
-                                </td>
-                                <td>
-                                    {{ \Carbon\Carbon::parse($booking->appointment_date)->format('M d, Y') }}
-                                    <br>
-                                    <small>{{ \Carbon\Carbon::parse($booking->appointment_time)->format('g:i A') }}</small>
-                                </td>
+                                <td>{{ $booking->email }}</td>
+                                <td>{{ $booking->phone }}</td>
+                                <td>{{ $booking->service->name }}</td>
+                                <td>{{ $booking->specialist->name ?? 'Not Assigned' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->appointment_date)->format('M d, Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->appointment_time)->format('g:i A') }}</td>
                                 <td>{{ number_format($booking->total_price, 2) }} LKR</td>
                                 <td>
                                     <span class="status-badge status-{{ $booking->status }}">
                                         {{ ucfirst($booking->status) }}
                                     </span>
+                                </td>
+                                <td class="text-end">
+                                    @if($booking->status === 'pending')
+                                    <form action="{{ route('admin.bookings.confirm', $booking->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="action-btn btn btn-success">
+                                            <i class="fas fa-check"></i> Confirm
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.bookings.reject', $booking->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="action-btn btn btn-danger">
+                                            <i class="fas fa-times"></i> Reject
+                                        </button>
+                                    </form>
+                                    @endif
                                 </td>
                                 <td>
                                     <span class="status-badge status-{{ $booking->payment_status }}">
