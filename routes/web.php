@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -19,6 +20,10 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
+
+    // Feedback routes
+    Route::get('/feedback/create/{booking}', [FeedbackController::class, 'create'])->name('feedback.create');
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
     // Admin routes
     Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -40,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/services/{service}/edit', [AdminController::class, 'editService'])->name('admin.services.edit');
         Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
         Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
+
+        // Feedback management routes
+        Route::get('/feedbacks', [App\Http\Controllers\Admin\FeedbackController::class, 'index'])->name('admin.feedback.index');
+        Route::patch('/feedbacks/{feedback}/toggle-publish', [App\Http\Controllers\Admin\FeedbackController::class, 'togglePublish'])->name('admin.feedback.toggle-publish');
 
         // Users routes
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');

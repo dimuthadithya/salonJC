@@ -114,6 +114,46 @@
         </div>
     </section>
 
+    <!-- Customer Reviews Section -->
+    <section class="customer-reviews py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Customers Say</h2>
+
+            @if($reviews->count() > 0)
+            <div class="row">
+                @foreach($reviews as $review)
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <=$review->rating)
+                                    <i class="fas fa-star text-warning"></i>
+                                    @else
+                                    <i class="far fa-star text-warning"></i>
+                                    @endif
+                                    @endfor
+                            </div>
+                            <p class="card-text">{{ $review->comment }}</p>
+                            <footer class="blockquote-footer mt-3">
+                                {{ $review->user->name }}
+                                <cite title="Review Date">
+                                    <small class="text-muted">
+                                        {{ $review->created_at->format('M d, Y') }}
+                                    </small>
+                                </cite>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <p class="text-center text-muted">No reviews yet. Be the first to share your experience!</p>
+            @endif
+        </div>
+    </section>
+
     <!-- Our Values Section -->
     <section class="our-values py-5">
         <div class="container">

@@ -51,6 +51,11 @@
             color: #c2185b;
         }
 
+        .stat-icon.feedbacks {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
         .stat-value {
             font-size: 24px;
             font-weight: 600;
@@ -150,6 +155,15 @@
                         </div>
                         <div class="stat-value">{{ $totalCustomers }}</div>
                         <div class="stat-label">Total Customers</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon feedbacks">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-value">{{ \App\Models\Feedback::count() }}</div>
+                        <div class="stat-label">Total Feedbacks</div>
                     </div>
                 </div>
             </div>

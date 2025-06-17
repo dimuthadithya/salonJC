@@ -485,8 +485,15 @@
                                         </div>
                                         <div class="appointment-actions">
                                             @if($appointment->status === 'completed')
-                                            <button class="btn btn-review">Write Review</button>
-                                            <button class="btn btn-rebook">Book Again</button>
+                                            @if(!$appointment->feedback)
+                                            <a href="{{ route('feedback.create', $appointment->id) }}"
+                                                class="btn btn-primary btn-sm me-2">
+                                                <i class="fas fa-star"></i> Write Review
+                                            </a>
+                                            @else
+                                            <span class="text-success"><i class="fas fa-check"></i> Review Submitted</span>
+                                            @endif
+                                            <button class="btn btn-secondary btn-sm btn-rebook">Book Again</button>
                                             @endif
                                         </div>
                                     </div>
