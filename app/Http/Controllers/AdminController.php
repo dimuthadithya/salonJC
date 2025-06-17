@@ -202,6 +202,20 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Booking has been rejected successfully.');
     }
 
+    public function cancelBooking(Booking $booking)
+    {
+        if ($booking->status === 'cancelled') {
+            return redirect()->back()->with('error', 'This booking is already cancelled.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been cancelled successfully.');
+    }
+
     // User Management Methods
     public function users()
     {

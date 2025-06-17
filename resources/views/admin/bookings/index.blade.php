@@ -41,12 +41,17 @@
             color: #1565c0;
         }
 
-        .action-btn {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            font-weight: 600;
+            min-width: 60px;
+            margin: 0 2px;
+        }
+
+        .btn-action i {
+            font-size: 0.75rem;
+            margin-right: 3px;
         }
     </style>
     @endpush
@@ -73,6 +78,7 @@
                                 <th>Time</th>
                                 <th>Price</th>
                                 <th>Status</th>
+                                <th>Payment</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -82,7 +88,7 @@
                                 <td>#{{ $booking->id }}</td>
                                 <td>{{ $booking->full_name }}</td>
                                 <td>{{ $booking->email }}</td>
-                                <td>{{ $booking->phone }}</td>
+                                <td>+{{ $booking->phone }}</td>
                                 <td>{{ $booking->service->name }}</td>
                                 <td>{{ $booking->specialist->name ?? 'Not Assigned' }}</td>
                                 <td>{{ \Carbon\Carbon::parse($booking->appointment_date)->format('M d, Y') }}</td>
@@ -93,32 +99,39 @@
                                         {{ ucfirst($booking->status) }}
                                     </span>
                                 </td>
-                                <td class="text-end">
-                                    @if($booking->status === 'pending')
-                                    <form action="{{ route('admin.bookings.confirm', $booking->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="action-btn btn btn-success">
-                                            <i class="fas fa-check"></i> Confirm
-                                        </button>
-                                    </form>
-                                    <form action="{{ route('admin.bookings.reject', $booking->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="action-btn btn btn-danger">
-                                            <i class="fas fa-times"></i> Reject
-                                        </button>
-                                    </form>
-                                    @endif
-                                </td>
                                 <td>
                                     <span class="status-badge status-{{ $booking->payment_status }}">
                                         {{ ucfirst($booking->payment_status) }}
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.bookings.show', $booking->id) }}"
-                                        class="btn btn-sm btn-outline-primary action-btn">
-                                        View
-                                    </a>
+                                    <div class="gap-1 d-flex justify-content-start">
+                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="btn btn-primary btn-action">
+                                            <i class="fas fa-eye"></i>View
+                                        </a>
+                                        @if($booking->status === 'pending')
+                                        <form action="{{ route('admin.bookings.confirm', $booking->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-action">
+                                                <i class="fas fa-check"></i>OK
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.bookings.reject', $booking->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-action">
+                                                <i class="fas fa-times"></i>No
+                                            </button>
+                                        </form>
+                                        @endif
+                                        @if($booking->status !== 'cancelled')
+                                        <form action="{{ route('admin.bookings.cancel', $booking->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('Are you sure you want to cancel this booking?')" class="btn btn-warning btn-action">
+                                                <i class="fas fa-ban"></i>Cancel
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                             @empty
