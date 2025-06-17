@@ -42,16 +42,24 @@
         }
 
         .btn-action {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            min-width: 60px;
+            padding: 0.4rem;
+            font-size: 14px;
+            width: 32px;
+            height: 32px;
             margin: 0 2px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-1px);
         }
 
         .btn-action i {
-            font-size: 0.75rem;
-            margin-right: 3px;
+            font-size: 14px;
         }
 
         .filter-card {
@@ -99,8 +107,8 @@
             </div>
 
             <div class="filter-card">
-                <form action="{{ route('admin.bookings') }}" method="GET" class="row g-3">
-                    <div class="col-md-4">
+                <form action="{{ route('admin.bookings') }}" method="GET" class="row g-3 align-items-end">
+                    <div class="col-md-8">
                         <label for="status" class="form-label">Booking Status</label>
                         <select name="status" id="status" class="form-select">
                             <option value="">All Bookings</option>
@@ -111,14 +119,6 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="payment_status" class="form-label">Payment Status</label>
-                        <select name="payment_status" id="payment_status" class="form-select">
-                            <option value="">All Payments</option>
-                            <option value="paid" {{ request('payment_status') === 'paid' ? 'selected' : '' }}>Paid</option>
-                            <option value="pending" {{ request('payment_status') === 'pending' ? 'selected' : '' }}>Pending</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
                         <div class="filter-buttons">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-filter"></i>Filter
@@ -172,28 +172,53 @@
                                 </td>
                                 <td>
                                     <div class="gap-1 d-flex justify-content-start">
-                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="btn btn-primary btn-action">
-                                            <i class="fas fa-eye"></i>View
+                                        <a href="{{ route('admin.bookings.show', $booking->id) }}"
+                                            class="btn btn-primary btn-action"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-title="View Details">
+                                            <i class="fas fa-eye"></i>
                                         </a>
                                         @if($booking->status === 'pending')
                                         <form action="{{ route('admin.bookings.confirm', $booking->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="btn btn-success btn-action">
-                                                <i class="fas fa-check"></i>OK
+                                            <button type="submit"
+                                                class="btn btn-success btn-action"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Confirm Booking">
+                                                <i class="fas fa-check"></i>
                                             </button>
                                         </form>
                                         <form action="{{ route('admin.bookings.reject', $booking->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="btn btn-danger btn-action">
-                                                <i class="fas fa-times"></i>No
+                                            <button type="submit"
+                                                class="btn btn-danger btn-action"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Reject Booking">
+                                                <i class="fas fa-times"></i>
                                             </button>
                                         </form>
                                         @endif
-                                        @if($booking->status !== 'cancelled')
+                                        @if($booking->status === 'confirmed')
+                                        <form action="{{ route('admin.bookings.complete', $booking->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure you want to mark this booking as completed?')"
+                                                class="btn btn-info btn-action"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Mark as Completed">
+                                                <i class="fas fa-check-circle"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                        @if($booking->status !== 'cancelled' && $booking->status !== 'completed')
                                         <form action="{{ route('admin.bookings.cancel', $booking->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" onclick="return confirm('Are you sure you want to cancel this booking?')" class="btn btn-warning btn-action">
-                                                <i class="fas fa-ban"></i>Cancel
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure you want to cancel this booking?')"
+                                                class="btn btn-warning btn-action"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Cancel Booking">
+                                                <i class="fas fa-ban"></i>
                                             </button>
                                         </form>
                                         @endif
@@ -212,4 +237,13 @@
         </div>
     </div>
     @endsection
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+    </script>
+    @endpush
 </x-admin-layout>

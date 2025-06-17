@@ -157,11 +157,6 @@ class AdminController extends Controller
             $query->where('status', $request->status);
         }
 
-        // Apply payment status filter
-        if ($request->filled('payment_status')) {
-            $query->where('payment_status', $request->payment_status);
-        }
-
         $bookings = $query->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -225,6 +220,20 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Booking has been cancelled successfully.');
+    }
+
+    public function completeBooking(Booking $booking)
+    {
+        if ($booking->status !== 'confirmed') {
+            return redirect()->back()->with('error', 'Only confirmed bookings can be marked as completed.');
+        }
+
+        $booking->update([
+            'status' => 'completed',
+            'completed_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been marked as completed successfully.');
     }
 
     // User Management Methods
