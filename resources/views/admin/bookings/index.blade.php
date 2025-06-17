@@ -53,6 +53,41 @@
             font-size: 0.75rem;
             margin-right: 3px;
         }
+
+        .filter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .form-select,
+        .form-control {
+            border-radius: 8px;
+            border-color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-buttons .btn {
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
     </style>
     @endpush
 
@@ -61,6 +96,39 @@
         <div class="container-fluid">
             <div class="mb-4 d-flex justify-content-between align-items-center">
                 <h2 class="mb-0">Manage Bookings</h2>
+            </div>
+
+            <div class="filter-card">
+                <form action="{{ route('admin.bookings') }}" method="GET" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="status" class="form-label">Booking Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="">All Bookings</option>
+                            <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="confirmed" {{ request('status') === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                            <option value="cancelled" {{ request('status') === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                            <option value="completed" {{ request('status') === 'completed' ? 'selected' : '' }}>Completed</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="payment_status" class="form-label">Payment Status</label>
+                        <select name="payment_status" id="payment_status" class="form-select">
+                            <option value="">All Payments</option>
+                            <option value="paid" {{ request('payment_status') === 'paid' ? 'selected' : '' }}>Paid</option>
+                            <option value="pending" {{ request('payment_status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <div class="filter-buttons">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-filter"></i>Filter
+                            </button>
+                            <a href="{{ route('admin.bookings') }}" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i>Reset
+                            </a>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <div class="data-table">
@@ -73,7 +141,6 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Service</th>
-                                <th>Specialist</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Price</th>
@@ -90,7 +157,6 @@
                                 <td>{{ $booking->email }}</td>
                                 <td>+{{ $booking->phone }}</td>
                                 <td>{{ $booking->service->name }}</td>
-                                <td>{{ $booking->specialist->name ?? 'Not Assigned' }}</td>
                                 <td>{{ \Carbon\Carbon::parse($booking->appointment_date)->format('M d, Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($booking->appointment_time)->format('g:i A') }}</td>
                                 <td>{{ number_format($booking->total_price, 2) }} LKR</td>

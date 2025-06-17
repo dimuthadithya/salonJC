@@ -148,11 +148,22 @@ class AdminController extends Controller
         return redirect()->route('admin.services')->with('success', 'Service deleted successfully');
     }
 
-    public function bookings()
+    public function bookings(Request $request)
     {
-        $bookings = Booking::with(['service', 'category'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $query = Booking::with(['service', 'category']);
+
+        // Apply status filter
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Apply payment status filter
+        if ($request->filled('payment_status')) {
+            $query->where('payment_status', $request->payment_status);
+        }
+
+        $bookings = $query->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('admin.bookings.index', compact('bookings'));
     }

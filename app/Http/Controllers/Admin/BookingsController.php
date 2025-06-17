@@ -8,11 +8,21 @@ use Illuminate\Http\Request;
 
 class BookingsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::with(['user', 'service'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $query = Booking::with(['user', 'service']);
+
+        // Apply status filter
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        // Apply payment status filter
+        if ($request->payment_status) {
+            $query->where('payment_status', $request->payment_status);
+        }
+
+        $bookings = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.bookings.index', compact('bookings'));
     }
