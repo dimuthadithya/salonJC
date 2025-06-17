@@ -6,7 +6,7 @@
     <header class="service-header">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center" data-aos="fade-up">
+                <div class="text-center col-12" data-aos="fade-up">
                     <h1>Our Beauty Services</h1>
                     <p class="lead">
                         Experience luxury beauty treatments tailored just for you
@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-title text-center" data-aos="fade-up">
+                    <div class="text-center section-title" data-aos="fade-up">
                         <span class="subtitle">Bridal Services</span>
                         <h2>Make Your Special Day Perfect</h2>
                     </div>
@@ -30,7 +30,7 @@
 
             <div class="row">
                 @foreach($bridalServices as $service)
-                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="mb-4 col-lg-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-bridal-service-card
                         :title="$service->name"
                         :price="'LKR ' . number_format($service->price, 2)"
@@ -48,16 +48,16 @@
     <section class="service-section bg-light" id="beauty-treatments">
         <div class="container">
             <!-- Facial Services -->
-            <div class="row mb-5">
+            <div class="mb-5 row">
                 <div class="col-12">
-                    <div class="section-title text-center" data-aos="fade-up">
+                    <div class="text-center section-title" data-aos="fade-up">
                         <span class="subtitle">Facial Services</span>
                         <h2>Advanced Facial Treatments</h2>
                     </div>
                 </div>
 
                 @foreach($facialServices as $service)
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-service-card
                         :title="$service->name"
                         :description="$service->description"
@@ -70,16 +70,16 @@
             </div>
 
             <!-- Hair Services -->
-            <div class="row mb-5">
+            <div class="mb-5 row">
                 <div class="col-12">
-                    <div class="section-title text-center" data-aos="fade-up">
+                    <div class="text-center section-title" data-aos="fade-up">
                         <span class="subtitle">Hair Services</span>
                         <h2>Professional Hair Care</h2>
                     </div>
                 </div>
 
                 @foreach($hairServices as $service)
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-service-card
                         :title="$service->name"
                         :description="$service->description"
@@ -92,16 +92,16 @@
             </div>
 
             <!-- Makeup Services -->
-            <div class="row mb-5">
+            <div class="mb-5 row">
                 <div class="col-12">
-                    <div class="section-title text-center" data-aos="fade-up">
+                    <div class="text-center section-title" data-aos="fade-up">
                         <span class="subtitle">Makeup Services</span>
                         <h2>Professional Makeup</h2>
                     </div>
                 </div>
 
                 @foreach($makeupServices as $service)
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-service-card
                         :title="$service->name"
                         :description="$service->description"
@@ -116,14 +116,14 @@
             <!-- Additional Services -->
             <div class="row">
                 <div class="col-12">
-                    <div class="section-title text-center" data-aos="fade-up">
+                    <div class="text-center section-title" data-aos="fade-up">
                         <span class="subtitle">Additional Services</span>
                         <h2>Beauty Extras</h2>
                     </div>
                 </div>
 
                 @foreach($additionalServices as $service)
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-service-card
                         :title="$service->name"
                         :description="$service->description"
@@ -133,21 +133,6 @@
                         :service-id="$service->id" />
                 </div>
                 @endforeach
-            </div>
-        </div>
-    </section>
-
-    <!-- Consultation CTA -->
-    <section class="consultation-cta">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center" data-aos="fade-up">
-                    <h2>Not Sure Which Service to Choose?</h2>
-                    <p class="text-white-50">Book a free consultation with our beauty experts</p>
-                    <button class="btn btn-consultation">
-                        Book Free Consultation
-                    </button>
-                </div>
             </div>
         </div>
     </section>
