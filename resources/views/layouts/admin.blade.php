@@ -184,6 +184,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.feedback.index') }}" class="nav-link {{ request()->routeIs('admin.feedback*') ? 'active' : '' }}">
+                    <i class="fas fa-comments"></i>
+                    Feedbacks
+                    @php
+                    $pendingCount = \App\Models\Feedback::where('is_published', false)->count();
+                    @endphp
+                    @if($pendingCount > 0)
+                    <span class="badge bg-warning text-dark ms-2">{{ $pendingCount }}</span>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link" target="_blank">
                     <i class="fas fa-globe"></i>
                     Visit Website

@@ -46,6 +46,10 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/services/{service}', [AdminController::class, 'updateService'])->name('admin.services.update');
         Route::delete('/services/{service}', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
 
+        // Feedback management routes
+        Route::get('/feedbacks', [App\Http\Controllers\Admin\FeedbackController::class, 'index'])->name('admin.feedback.index');
+        Route::patch('/feedbacks/{feedback}/toggle-publish', [App\Http\Controllers\Admin\FeedbackController::class, 'togglePublish'])->name('admin.feedback.toggle-publish');
+
         // Users routes
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
 

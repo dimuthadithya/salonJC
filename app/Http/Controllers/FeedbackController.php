@@ -58,14 +58,15 @@ class FeedbackController extends Controller
             return redirect()->route('dashboard')
                 ->with('error', 'You have already submitted a review for this booking.');
         }
-
-        $feedback = new Feedback($validated);
-        $feedback->user_id = Auth::id();
-        $feedback->booking_id = $booking->id;
-        $feedback->is_published = true; // Auto-publish reviews
-        $feedback->save();
+        $feedback = Feedback::create([
+            'user_id' => Auth::id(),
+            'booking_id' => $booking->id,
+            'rating' => $validated['rating'],
+            'comment' => $validated['comment'],
+            'is_published' => false // Reviews need admin approval
+        ]);
 
         return redirect()->route('dashboard')
-            ->with('success', 'Thank you for your feedback!');
+            ->with('success', 'Thank you for your feedback! It will be published after review.');
     }
 }
