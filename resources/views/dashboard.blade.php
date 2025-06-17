@@ -193,37 +193,6 @@
             background: #43a047;
             color: white;
         }
-
-        /* Modal styles */
-        .modal-content {
-            background: #fff;
-            border-radius: 15px;
-        }
-
-        .modal-header {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1rem 1.5rem;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-title {
-            color: #333;
-            font-weight: 600;
-        }
-
-        #rescheduleForm .form-control {
-            background: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-
-        #rescheduleForm .form-control:focus {
-            border-color: #1e88e5;
-            box-shadow: 0 0 0 0.2rem rgba(30, 136, 229, 0.25);
-        }
     </style>
     @endpush
 
@@ -232,10 +201,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function() {
-            // Initialize Bootstrap modal
-            const rescheduleModal = new bootstrap.Modal(document.getElementById('rescheduleModal'));
-
+        document.addEventListener('DOMContentLoaded', function() {
             // Handle booking cancellation
             $('.btn-cancel').click(function() {
                 if (confirm('Are you sure you want to cancel this booking?')) {
@@ -263,85 +229,35 @@
                 e.preventDefault();
                 const appointmentItem = $(this).closest('.appointment-item');
                 const bookingId = appointmentItem.data('booking-id');
-                $('#rescheduleBookingId').val(bookingId);
-                rescheduleModal.show();
-            });
 
-            // Handle reschedule form submission
-            $('#rescheduleForm').submit(function(e) {
-                e.preventDefault();
-                const bookingId = $('#rescheduleBookingId').val();
-                const formData = $(this).serialize();
-
-                // Validate date is at least 2 days in future
-                const selectedDate = new Date($('#appointment_date').val());
-                const minDate = new Date();
-                minDate.setDate(minDate.getDate() + 2);
-
-                if (selectedDate < minDate) {
-                    alert('Please select a date at least 2 days in the future.');
-                    return;
-                }
-
-                $.ajax({
-                    url: `/bookings/${bookingId}/reschedule`,
-                    type: 'POST',
-                    data: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        rescheduleModal.hide();
-                        window.location.reload();
-                    },
-                    error: function(error) {
-                        if (error.responseJSON && error.responseJSON.message) {
-                            alert(error.responseJSON.message);
-                        } else {
-                            alert('Failed to reschedule booking. Please try again.');
+                if (confirm('Do you want to extend your appointment by 1 day?')) {
+                    $.ajax({
+                        url: `/bookings/${bookingId}/reschedule`,
+                        type: 'POST',
+                        data: {
+                            extend_days: 1
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        },
+                        error: function(error) {
+                            if (error.responseJSON && error.responseJSON.message) {
+                                alert(error.responseJSON.message);
+                            } else {
+                                alert('Failed to reschedule booking. Please try again.');
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
         });
     </script>
     @endpush
 
-    <!-- Reschedule Modal -->
-    <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="rescheduleModalLabel">Reschedule Appointment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="rescheduleForm">
-                        @csrf
-                        <input type="hidden" id="rescheduleBookingId" name="booking_id">
-                        <div class="mb-3">
-                            <label for="appointment_date" class="form-label">New Date</label>
-                            <input type="date" class="form-control" id="appointment_date" name="appointment_date" required
-                                min="{{ now()->addDays(2)->format('Y-m-d') }}">
-                            <div class="form-text">Must be at least 2 days from today.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="appointment_time" class="form-label">New Time</label>
-                            <select class="form-control" id="appointment_time" name="appointment_time" required>
-                                @foreach($timeSlots as $slot)
-                                <option value="{{ $slot }}">{{ date('g:i A', strtotime($slot)) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="px-0 pb-0 modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Confirm Reschedule</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     @section('content')
     <!-- Dashboard Section -->

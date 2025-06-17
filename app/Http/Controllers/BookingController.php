@@ -174,22 +174,15 @@ class BookingController extends Controller
 
         // Only allow rescheduling if booking is confirmed
         if ($booking->status !== 'confirmed') {
-            return redirect()->back()->with('error', 'Only confirmed bookings can be rescheduled.');
+            return response()->json(['message' => 'Only confirmed bookings can be rescheduled.'], 400);
         }
 
-        // Validate new date is at least 2 days in advance
-        $request->validate([
-            'appointment_date' => [
-                'required',
-                'date',
-                'after:' . now()->addDays(2)->format('Y-m-d')
-            ],
-            'appointment_time' => 'required'
-        ]);
+        // Extend the booking date by 1 day
+        $currentDate = \Carbon\Carbon::parse($booking->appointment_date);
+        $newDate = $currentDate->addDay();
 
         $booking->update([
-            'appointment_date' => $request->appointment_date,
-            'appointment_time' => $request->appointment_time
+            'appointment_date' => $newDate->format('Y-m-d')
         ]);
 
         return redirect()->back()->with('success', 'Booking rescheduled successfully.');
