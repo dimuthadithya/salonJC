@@ -26,6 +26,10 @@ Route::middleware(['auth'])->group(function () {
 
         // Bookings routes
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
+        Route::post('/bookings/{booking}/confirm', [AdminController::class, 'confirmBooking'])->name('admin.bookings.confirm');
+        Route::post('/bookings/{booking}/reject', [AdminController::class, 'rejectBooking'])->name('admin.bookings.reject');
+        Route::post('/bookings/{booking}/cancel', [AdminController::class, 'cancelBooking'])->name('admin.bookings.cancel');
+        Route::post('/bookings/{booking}/complete', [AdminController::class, 'completeBooking'])->name('admin.bookings.complete');
         Route::get('/bookings/{booking}', [AdminController::class, 'showBooking'])->name('admin.bookings.show');
         Route::put('/bookings/{booking}/status', [AdminController::class, 'updateBookingStatus'])->name('admin.bookings.update-status');
 
@@ -61,6 +65,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/booking/{id}/payment', [BookingController::class, 'showPayment'])->name('booking.payment');
     Route::post('/booking/{id}/payment', [BookingController::class, 'processPayment'])->name('booking.payment.process');
     Route::get('/booking/{id}/payment/success', [BookingController::class, 'paymentSuccess'])->name('booking.payment.success');
+
+    // Booking management routes
+    Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::post('/bookings/{id}/reschedule', [BookingController::class, 'reschedule'])->name('bookings.reschedule');
 });
 
 Route::middleware('auth')->group(function () {

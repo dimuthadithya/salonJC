@@ -148,11 +148,17 @@ class AdminController extends Controller
         return redirect()->route('admin.services')->with('success', 'Service deleted successfully');
     }
 
-    public function bookings()
+    public function bookings(Request $request)
     {
-        $bookings = Booking::with(['service', 'category'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $query = Booking::with(['service', 'category']);
+
+        // Apply status filter
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('admin.bookings.index', compact('bookings'));
     }
@@ -172,6 +178,62 @@ class AdminController extends Controller
 
         $booking->update($validated);
         return redirect()->back()->with('success', 'Booking status updated successfully');
+    }
+
+    public function confirmBooking(Booking $booking)
+    {
+        if ($booking->status !== 'pending' || $booking->payment_status !== 'paid') {
+            return redirect()->back()->with('error', 'Only pending bookings with paid status can be confirmed.');
+        }
+
+        $booking->update([
+            'status' => 'confirmed',
+            'confirmed_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been confirmed successfully.');
+    }
+
+    public function rejectBooking(Booking $booking)
+    {
+        if ($booking->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending bookings can be rejected.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been rejected successfully.');
+    }
+
+    public function cancelBooking(Booking $booking)
+    {
+        if ($booking->status === 'cancelled') {
+            return redirect()->back()->with('error', 'This booking is already cancelled.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been cancelled successfully.');
+    }
+
+    public function completeBooking(Booking $booking)
+    {
+        if ($booking->status !== 'confirmed') {
+            return redirect()->back()->with('error', 'Only confirmed bookings can be marked as completed.');
+        }
+
+        $booking->update([
+            'status' => 'completed',
+            'completed_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking has been marked as completed successfully.');
     }
 
     // User Management Methods

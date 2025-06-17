@@ -110,17 +110,12 @@
     <div class="admin-dashboard">
         <div class="container">
             <!-- Page Header -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
                 <h1 class="h3">Admin Dashboard</h1>
-                <div class="actions">
-                    <a href="" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Add New Service
-                    </a>
-                </div>
             </div>
 
             <!-- Statistics Cards -->
-            <div class="row g-4 mb-4">
+            <div class="mb-4 row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="stat-card">
                         <div class="stat-icon bookings">
@@ -160,8 +155,8 @@
             </div>
 
             <!-- Recent Bookings Table -->
-            <div class="data-table mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="mb-4 data-table">
+                <div class="mb-3 d-flex justify-content-between align-items-center">
                     <h3>Recent Bookings</h3>
                     <a href="{{ route('admin.bookings') }}" class="btn btn-link">View All</a>
                 </div>
@@ -214,7 +209,7 @@
 
             <!-- Popular Services Table -->
             <div class="data-table">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="mb-3 d-flex justify-content-between align-items-center">
                     <h3>Popular Services</h3>
                     <a href="{{ route('admin.services') }}" class="btn btn-link">Manage Services</a>
                 </div>

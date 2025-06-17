@@ -169,26 +169,7 @@
                             </div>
                         </div>
 
-                        <!-- Booking Actions -->
-                        <div class="booking-actions">
-                            <h4 class="mb-4">Update Booking Status</h4>
-                            <form action="{{ route('admin.bookings.update-status', $booking->id) }}" method="POST" class="d-flex gap-2">
-                                @csrf
-                                @method('PUT')
-                                <select name="status" class="form-select">
-                                    <option value="pending" {{ $booking->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="confirmed" {{ $booking->status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                                    <option value="cancelled" {{ $booking->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                    <option value="completed" {{ $booking->status === 'completed' ? 'selected' : '' }}>Completed</option>
-                                </select>
-                                <select name="payment_status" class="form-select">
-                                    <option value="pending" {{ $booking->payment_status === 'pending' ? 'selected' : '' }}>Payment Pending</option>
-                                    <option value="paid" {{ $booking->payment_status === 'paid' ? 'selected' : '' }}>Paid</option>
-                                    <option value="failed" {{ $booking->payment_status === 'failed' ? 'selected' : '' }}>Failed</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary">Update Status</button>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
             </div>

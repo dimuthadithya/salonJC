@@ -137,9 +137,8 @@ class BookingController extends Controller
         $booking->update([
             'payment_status' => 'paid',
             'payment_method' => 'credit_card',
-            'transaction_id' => 'TXN_' . uniqid(),
-            'status' => 'confirmed',
-            'confirmed_at' => now()
+            'transaction_id' => 'TXN_' . uniqid()
+            // Status remains 'pending' until admin confirms
         ]);
 
         return redirect()->route('booking.payment.success', $booking->id);
@@ -149,5 +148,42 @@ class BookingController extends Controller
     {
         $booking = Booking::findOrFail($id);
         return view('booking.success', compact('booking'));
+    }
+
+    public function cancel($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // Only allow cancellation if booking is pending and not yet cancelled
+        if ($booking->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending bookings can be cancelled.');
+        }
+
+        $booking->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return redirect()->back()->with('success', 'Booking cancelled successfully.');
+    }
+
+    public function reschedule(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // Only allow rescheduling if booking is confirmed
+        if ($booking->status !== 'confirmed') {
+            return response()->json(['message' => 'Only confirmed bookings can be rescheduled.'], 400);
+        }
+
+        // Extend the booking date by 1 day
+        $currentDate = \Carbon\Carbon::parse($booking->appointment_date);
+        $newDate = $currentDate->addDay();
+
+        $booking->update([
+            'appointment_date' => $newDate->format('Y-m-d')
+        ]);
+
+        return redirect()->back()->with('success', 'Booking rescheduled successfully.');
     }
 }
