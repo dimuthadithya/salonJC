@@ -41,4 +41,9 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class);
+    }
 }
