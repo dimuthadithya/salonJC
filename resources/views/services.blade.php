@@ -16,20 +16,32 @@
         </div>
     </header>
 
-    <!-- Bridal Services Section -->
-    <section class="service-section" id="bridal-services">
+    @foreach($categories as $category)
+    @php
+    $bgClass = $loop->even ? 'bg-light' : '';
+    $iconClass = match($category->name) {
+    'Bridal Services' => 'fa-ring',
+    'Facial Services' => 'fa-spa',
+    'Hair Services' => 'fa-cut',
+    'Makeup Services' => 'fa-magic',
+    default => 'fa-star'
+    };
+    @endphp
+
+    <section class="service-section {{ $bgClass }}" id="{{ Str::slug($category->name) }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="text-center section-title" data-aos="fade-up">
-                        <span class="subtitle">Bridal Services</span>
-                        <h2>Make Your Special Day Perfect</h2>
+                        <span class="subtitle">{{ $category->name }}</span>
+                        <h2>{{ $category->description ?: $category->name }}</h2>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                @foreach($bridalServices as $service)
+                @if($category->name === 'Bridal Services')
+                @foreach($category->services as $service)
                 <div class="mb-4 col-lg-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <x-bridal-service-card
                         :title="$service->name"
@@ -40,101 +52,22 @@
                         :service-id="$service->id" />
                 </div>
                 @endforeach
+                @else
+                @foreach($category->services as $service)
+                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <x-service-card
+                        :title="$service->name"
+                        :description="$service->description"
+                        :price="'LKR ' . number_format($service->price, 2)"
+                        :duration="$service->duration . ' mins'"
+                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas ' . $iconClass"
+                        :service-id="$service->id" />
+                </div>
+                @endforeach
+                @endif
             </div>
         </div>
     </section>
-
-    <!-- Beauty Treatments Section -->
-    <section class="service-section bg-light" id="beauty-treatments">
-        <div class="container">
-            <!-- Facial Services -->
-            <div class="mb-5 row">
-                <div class="col-12">
-                    <div class="text-center section-title" data-aos="fade-up">
-                        <span class="subtitle">Facial Services</span>
-                        <h2>Advanced Facial Treatments</h2>
-                    </div>
-                </div>
-
-                @foreach($facialServices as $service)
-                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <x-service-card
-                        :title="$service->name"
-                        :description="$service->description"
-                        :price="'LKR ' . number_format($service->price, 2)"
-                        :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-spa'"
-                        :service-id="$service->id" />
-                </div>
-                @endforeach
-            </div>
-
-            <!-- Hair Services -->
-            <div class="mb-5 row">
-                <div class="col-12">
-                    <div class="text-center section-title" data-aos="fade-up">
-                        <span class="subtitle">Hair Services</span>
-                        <h2>Professional Hair Care</h2>
-                    </div>
-                </div>
-
-                @foreach($hairServices as $service)
-                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <x-service-card
-                        :title="$service->name"
-                        :description="$service->description"
-                        :price="'LKR ' . number_format($service->price, 2)"
-                        :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-cut'"
-                        :service-id="$service->id" />
-                </div>
-                @endforeach
-            </div>
-
-            <!-- Makeup Services -->
-            <div class="mb-5 row">
-                <div class="col-12">
-                    <div class="text-center section-title" data-aos="fade-up">
-                        <span class="subtitle">Makeup Services</span>
-                        <h2>Professional Makeup</h2>
-                    </div>
-                </div>
-
-                @foreach($makeupServices as $service)
-                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <x-service-card
-                        :title="$service->name"
-                        :description="$service->description"
-                        :price="'LKR ' . number_format($service->price, 2)"
-                        :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-magic'"
-                        :service-id="$service->id" />
-                </div>
-                @endforeach
-            </div>
-
-            <!-- Additional Services -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center section-title" data-aos="fade-up">
-                        <span class="subtitle">Additional Services</span>
-                        <h2>Beauty Extras</h2>
-                    </div>
-                </div>
-
-                @foreach($additionalServices as $service)
-                <div class="mb-4 col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <x-service-card
-                        :title="$service->name"
-                        :description="$service->description"
-                        :price="'LKR ' . number_format($service->price, 2)"
-                        :duration="$service->duration . ' mins'"
-                        :icon="$service->images->where('is_primary', true)->first()?->image_path ?? 'fas fa-star'"
-                        :service-id="$service->id" />
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+    @endforeach
 </main>
 @endsection
